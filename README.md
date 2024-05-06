@@ -4,7 +4,7 @@
 
 * Connect to device
 
-      ```c#
+  ```c#
   private ConnectToDevice _connectCommand;
   
   public void Connect()
@@ -36,7 +36,7 @@
           _isConnected = false;
           _deviceButtonText.text = "Connect";
       }
-      ```
+  ```
 
 * Subscribe to characteristics
 

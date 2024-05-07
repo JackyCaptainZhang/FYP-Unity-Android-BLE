@@ -1210,6 +1210,7 @@ MonoBehaviour:
   _deviceList_item: {fileID: 663478794}
   _deviceList: {fileID: 165422878}
   _scanbutton: {fileID: 2063471662}
+  _buttonText: {fileID: 461374746}
   _scanTime: 10
   cameraA: {fileID: 602030650}
   cameraB: {fileID: 168424409}
@@ -1297,8 +1298,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 2062572098}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: ScanForDevices
+        m_TargetAssemblyTypeName: ExampleBleInteractor, Assembly-CSharp
+        m_MethodName: onClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

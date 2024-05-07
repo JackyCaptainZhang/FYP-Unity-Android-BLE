@@ -2,6 +2,8 @@
 using Android.BLE;
 using Android.BLE.Commands;
 using UnityEngine.Android;
+using System.Text;
+using UnityEngine.UI;
 
 public class ExampleBleInteractor : MonoBehaviour
 {
@@ -13,6 +15,8 @@ public class ExampleBleInteractor : MonoBehaviour
     private Transform _deviceList;
     [SerializeField]
     private Transform _scanbutton;
+    [SerializeField]
+    private Text _buttonText;
 
     [SerializeField]
     private int _scanTime = 10;
@@ -25,6 +29,9 @@ public class ExampleBleInteractor : MonoBehaviour
     private float _scanTimer = 0f;
 
     private bool _isScanning = false;
+    private ReadFromCharacteristic _readFromCharacteristic;
+    private SubscribeToCharacteristic _subscribeToCharacteristic;
+    private bool _isSubscribed = false;
 
 
     public void ScanForDevices()
@@ -36,11 +43,44 @@ public class ExampleBleInteractor : MonoBehaviour
         }
     }
 
+    public void onClick()
+    {
+        if (!DeviceButton._isConnected)
+        {
+            ScanForDevices();
+        }
+        else if (!_isSubscribed)
+        {
+            SubscribeToExampleService();
+        }
+        else
+        {
+            UnsubscribeFromExampleService();
+        }
+    }
+
+    public void SubscribeToExampleService()
+    {
+        // Replace these Characteristics with YOUR device's characteristics
+        // "0000" (Service UUID) and "0001"(Characteristics UUID) is a part of "0000" + service + "-0000-1000-8000-00805f9b34fb" by default.
+        _isSubscribed = true;
+        _subscribeToCharacteristic = new SubscribeToCharacteristic(DeviceButton.connectted_deviceUuid, "0000", "0001");
+        BleManager.Instance.QueueCommand(_subscribeToCharacteristic);
+    }
+
+    public void UnsubscribeFromExampleService()
+    {
+        _isSubscribed = false;
+        _subscribeToCharacteristic.End();
+        
+    }
+
 
     private void Start()
     {
         cameraA.enabled = false;
         cameraB.enabled = true;
+        
     }
 
 
@@ -56,18 +96,25 @@ public class ExampleBleInteractor : MonoBehaviour
             }
         }
 
-        if (DeviceButton._isConnected) {
-            //_deviceList.gameObject.SetActive(false);
-            //_scanbutton.gameObject.SetActive(false);
-            //cameraA.enabled = true;
-            //cameraB.enabled = false;
+        if (_isSubscribed)
+        {
+            _buttonText.text = "Unsubscribe";
         }
         else
         {
-            //_deviceList.gameObject.SetActive(true);
-            //_scanbutton.gameObject.SetActive(true);
-            //cameraA.enabled = false;
-            //cameraB.enabled = true;
+            _buttonText.text = "Subscribe";
+        }
+
+        if (DeviceButton._isConnected) {
+            
+        }
+        else
+        {
+            _buttonText.text = "Scan";
+            _deviceList.gameObject.SetActive(true);
+            _scanbutton.gameObject.SetActive(true);
+            cameraA.enabled = false;
+            cameraB.enabled = true;
         }
     }
 

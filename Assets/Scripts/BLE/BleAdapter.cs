@@ -1,5 +1,7 @@
 ﻿using Android.BLE.Events;
 using UnityEngine;
+using System.Text;
+using System;
 
 namespace Android.BLE
 {
@@ -27,16 +29,30 @@ namespace Android.BLE
         /// <param name="jsonMessage">The <see cref="BleObject"/> in JSON format.</param>
         public void OnBleMessage(string jsonMessage)
         {
+            Debug.Log("Received JSON: " + jsonMessage);
             BleObject obj = JsonUtility.FromJson<BleObject>(jsonMessage);
             if (obj.HasError)
             {
                 OnErrorReceived?.Invoke(obj.ErrorMessage);
                 UnityOnErrorReceived?.Invoke(obj.ErrorMessage);
+                Debug.LogError("Error: " + obj.ErrorMessage);
             }
             else
             {
                 OnMessageReceived?.Invoke(obj);
                 UnityOnMessageReceived?.Invoke(obj);
+                string decodedMessage = "";
+                try
+                {
+                    byte[] data = Convert.FromBase64String(obj.Base64Message);  // Base64 decoding
+                    decodedMessage = Encoding.UTF8.GetString(data);  // change to string message
+                }
+                catch (FormatException fe)
+                {
+                    Debug.LogError("Base64 String could not be decoded: " + fe.Message);
+                }
+
+                Debug.Log("Received Message: " + decodedMessage);
             }
         }
 

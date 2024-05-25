@@ -61,7 +61,6 @@ public class DeviceButton : MonoBehaviour
     {
         _previousColor = _deviceButtonImage.color;
         _deviceButtonImage.color = _onConnectedColor;
-
         _isConnected = true;
         _deviceButtonText.text = "Disconnect";
     }

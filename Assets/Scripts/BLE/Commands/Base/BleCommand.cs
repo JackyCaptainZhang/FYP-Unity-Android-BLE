@@ -1,29 +1,21 @@
 ﻿namespace Android.BLE.Commands
 {
     /// <summary>
-    /// The base class to interact with the Java library.
+    /// The base class for all BLE commands to inherit from
     /// </summary>
     public abstract class BleCommand
     {
-        /// <summary>
-        /// If queued as an active command, this will be it's maximum lifespan.
-        /// </summary>
+
         public float Timeout { get => _timeout; }
         protected float _timeout = 5f;
 
-        /// <summary>
-        /// If <see langword="true"/>, the <see cref="BleCommand"/> will run parallel with 
-        /// other commands. Helpful for commands such as <see cref="SubscribeToCharacteristic"/>.
-        /// </summary>
+        // If true, command will run parallel
         public readonly bool RunParallel = false;
 
-        /// <summary>
-        /// Will continue running, even if <see cref="CommandReceived(BleObject)"/> returns <see langword="true"/>
-        /// </summary>
         public readonly bool RunContiniously = false;
 
         /// <summary>
-        /// Base initialization of the <see cref="BleCommand"/>.
+        /// Base initialization of the BleCommand
         /// </summary>
         public BleCommand(bool runParallel = false, bool runContiniously = false)
         {
@@ -32,27 +24,29 @@
         }
 
         /// <summary>
-        /// Starts the the execution of the <see cref="BleCommand"/>.
+        /// Starts the the execution of the BleCommand.
+        /// Will be overwrittten in each command.
         /// </summary>
         public abstract void Start();
 
         /// <summary>
-        /// Ends the <see cref="BleCommand"/>, useful for unsubscribing from Characteristics 
-        /// for commands such as <see cref="SubscribeToCharacteristic"/>.
+        /// Ends the BleCommand.
+        /// Will be overwrittten in each command.
         /// </summary>
         public virtual void End() { }
 
         /// <summary>
-        /// Ends the <see cref="BleCommand"/> when time runs out, by default calls <see cref="End"/>.
+        /// Ends the BleCommand when time runs out, by default calls End().
         /// </summary>
         public virtual void EndOnTimeout() => End();
 
         /// <summary>
-        /// The <see cref="BleManager"/> will send <see cref="BleObject"/> through this 
-        /// method, which it can use to react accordingly.
+        /// Work with OnBleMessageReceived() in BleManager.
+        /// Checks the message back from the plugin.
+        /// It shows if the command sent from Unity is executed correctly or not by the plugin.
+        /// You can control the response behaviour of each command by overwritting this method.
+        /// Will return true if the command is successfully executed by plugin.
         /// </summary>
-        /// <param name="obj">The <see cref="BleObject"/> containing the raw information from the Java library.</param>
-        /// <returns>Returns <see langword="true"/> if the <see cref="BleCommand"/> consumes the <see cref="BleObject"/>.</returns>
         public virtual bool CommandReceived(BleObject obj)
         {
             return false;

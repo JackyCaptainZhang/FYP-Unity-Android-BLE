@@ -45,13 +45,11 @@ namespace Android.BLE
         private string errorMessage = string.Empty;
         #endregion
 
-         public string Base64Message { get => base64Message; }
+        public string Base64Message { get => base64Message; }
         [SerializeField]
         private string base64Message = string.Empty;
 
         public byte[] GetByteMessage() => Convert.FromBase64String(base64Message);
-
-        
 
         public override string ToString() => JsonUtility.ToJson(this, true);
     }

@@ -5,6 +5,10 @@ using UnityEngine.Android;
 using System.Text;
 using UnityEngine.UI;
 
+/// <summary>
+/// This script mainly focus on the UI logic
+/// </summary>
+
 public class ExampleBleInteractor : MonoBehaviour
 {
     [SerializeField]
@@ -19,7 +23,10 @@ public class ExampleBleInteractor : MonoBehaviour
     private Text _buttonText;
 
     [SerializeField]
-    private int _scanTime = 10;
+    private int _scanTime = 5;
+
+    [SerializeField]
+    private Text dataDisplayBox;
 
     [SerializeField]
     public Camera cameraA;
@@ -31,7 +38,7 @@ public class ExampleBleInteractor : MonoBehaviour
     private bool _isScanning = false;
     private ReadFromCharacteristic _readFromCharacteristic;
     private SubscribeToCharacteristic _subscribeToCharacteristic;
-    private bool _isSubscribed = false;
+    public static bool _isSubscribed = false;
 
 
     public void ScanForDevices()
@@ -39,10 +46,16 @@ public class ExampleBleInteractor : MonoBehaviour
         if (!_isScanning)
         {
             _isScanning = true;
+            // Queue command for DiscoverDevices
+            // Bind OnDeviceFound() to Event OnDeviceDiscovered
+            // Send _scanTime to system
             BleManager.Instance.QueueCommand(new DiscoverDevices(OnDeviceFound, _scanTime * 1000));
         }
     }
 
+    /// <summary>
+    /// Define different click actions for different senerio
+    /// </summary>
     public void onClick()
     {
         if (!DeviceButton._isConnected)
@@ -65,22 +78,19 @@ public class ExampleBleInteractor : MonoBehaviour
         // "0000" (Service UUID) and "0001"(Characteristics UUID) is a part of "0000" + service + "-0000-1000-8000-00805f9b34fb" by default.
         _isSubscribed = true;
         _subscribeToCharacteristic = new SubscribeToCharacteristic(DeviceButton.connectted_deviceUuid, "0000", "0001");
-        BleManager.Instance.QueueCommand(_subscribeToCharacteristic);
+        _subscribeToCharacteristic.Start();
     }
 
-    public void UnsubscribeFromExampleService()
+    public void UnsubscribeFromExampleService() // Unsubscribe function
     {
         _isSubscribed = false;
         _subscribeToCharacteristic.End();
-        
     }
 
 
     private void Start()
     {
-        cameraA.enabled = false;
-        cameraB.enabled = true;
-        
+       
     }
 
 
@@ -88,7 +98,7 @@ public class ExampleBleInteractor : MonoBehaviour
     {
         if(_isScanning)
         {
-            _scanTimer += Time.deltaTime;
+            _scanTimer += Time.deltaTime;  // Set the timer
             if(_scanTimer > _scanTime)
             {
                 _scanTimer = 0f;
@@ -99,10 +109,15 @@ public class ExampleBleInteractor : MonoBehaviour
         if (_isSubscribed)
         {
             _buttonText.text = "Unsubscribe";
+            cameraA.enabled = true;
+            cameraB.enabled = false;
+            dataDisplayBox.text = BleAdapter.decodedMessage; // Display the received message from BleAdapter
         }
         else
         {
             _buttonText.text = "Subscribe";
+            cameraA.enabled = false;
+            cameraB.enabled = true;
         }
 
         if (DeviceButton._isConnected) {
@@ -118,7 +133,10 @@ public class ExampleBleInteractor : MonoBehaviour
         }
     }
 
-    private void OnDeviceFound(string name, string device)
+    /// <summary>
+    /// Function that bound to Event OnDeviceDiscovered.
+    /// </summary>
+    private void OnDeviceFound(string name, string device)  
     {
         DeviceButton button = Instantiate(_deviceButton, _deviceList_item).GetComponent<DeviceButton>();
         button.Show(name, device);

@@ -3,40 +3,29 @@
 namespace Android.BLE.Commands
 {
     /// <summary>
-    /// Command to start discovering BLE devices in the area.
+    /// Command to start scanning discovering BLE devices
     /// </summary>
     public class DiscoverDevices : BleCommand
     {
-        /// <summary>
-        /// Default time that this command will search BLE devices for (in milliseconds).
-        /// </summary>
+
+        // Default time that this command will search BLE devices for (in milliseconds).
         private const int StandardDiscoverTime = 10000;
 
-        /// <summary>
-        /// The .NET event that indicates that a new BLE device is discovered.
-        /// </summary>
-        public readonly DeviceDiscovered OnDeviceDiscovered;
-
-        /// <summary>
-        /// The time that this command will search BLE devices for.
-        /// </summary>
+        // The time that this command will search BLE devices for.
         private int _discoverTime;
 
-        /// <summary>
-        /// Discovers BLE devices using the given time in milliseconds.
-        /// </summary>
-        /// <param name="discoverTime">The amount of searching time in milliseconds that. Defaults to <see cref="StandardDiscoverTime"/>.</param>
-        public DiscoverDevices(int discoverTime = StandardDiscoverTime) : base(true, false)
-        {
-            _discoverTime = discoverTime;
-        }
+        // A delegate that indicates a newly discovered BLE device.
+        public delegate void DeviceDiscovered(string deviceAddress, string deviceName);
+
+        // The .NET Event that indicates a new BLE device is discovered.
+        public readonly DeviceDiscovered OnDeviceDiscovered;
+
 
         /// <summary>
-        /// Discovers BLE devices using the given time in milliseconds and
-        /// passes the UUID of the discovered devices.
+        /// Bind the incomming function to Event OnDeviceDiscovered, so the function can be called
+        /// when the new device is discovered.
+        /// Incomming function OnDeviceDiscovered must include name and UUID of the discovered devices.
         /// </summary>
-        /// <param name="onDeviceDiscovered">The <see cref="DeviceDiscovered"/> that will trigger if a device is discovered.</param>
-        /// <param name="discoverTime">The amount of searching time in milliseconds that. Defaults to <see cref="StandardDiscoverTime"/>.</param>
         public DiscoverDevices(Action<string, string> onDeviceDiscovered, int discoverTime = StandardDiscoverTime) : base(true, false)
         {
             OnDeviceDiscovered += new DeviceDiscovered(onDeviceDiscovered);
@@ -47,19 +36,18 @@ namespace Android.BLE.Commands
 
         public override void End() => BleManager.SendCommand("stopScanBleDevices");
 
+        /// <summary>
+        /// Work with OnBleMessageReceived(obj) function in BleManager
+        /// </summary>
         public override bool CommandReceived(BleObject obj)
         {
+            // The Event OnDeviceDiscovered will be triggered in loop
+            // if the message from plugin is "DiscoveredDevice"
             if (string.Equals(obj.Command, "DiscoveredDevice"))
                 OnDeviceDiscovered?.Invoke(obj.Device, obj.Name);
-
+            // will only stop the event if the message from plugin is "FinishedDiscovering"
             return string.Equals(obj.Command, "FinishedDiscovering");
+            // So all the discovered device can be listed in the game
         }
-
-        /// <summary>
-        /// A delegate that indicates a newly discovered BLE device.
-        /// </summary>
-        /// <param name="deviceAddress">The UUID of the BLE device.</param>
-        /// <param name="deviceName">The (nick)name of the BLE device.</param>
-        public delegate void DeviceDiscovered(string deviceAddress, string deviceName);
     }
 }

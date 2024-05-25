@@ -6,17 +6,21 @@ using System;
 namespace Android.BLE
 {
     /// <summary>
-    /// The adapter between the Java library and Unity's .NET environment.
+    /// The adapter between the Java library and Unity's .NET event environment.
+    /// This adapter is bound to BleManager
     /// </summary>
     public class BleAdapter : MonoBehaviour
     {
-        // .NET Events
+        public delegate void MessageReceived(BleObject obj);
+        public delegate void ErrorReceived(string errorMessage);
+
+        // Unity .NET Events
         public event MessageReceived OnMessageReceived;
         public event ErrorReceived OnErrorReceived;
 
-        // Unity Events
-        public BleMessageReceived UnityOnMessageReceived;
-        public BleErrorReceived UnityOnErrorReceived;
+        
+        public static string decodedMessage = "";
+
 
         /// <summary>
         /// Sets the name to "BleAdapter" to receive messages from the Java library.
@@ -24,41 +28,49 @@ namespace Android.BLE
         private void Awake() => gameObject.name = nameof(BleAdapter);
 
         /// <summary>
-        /// The method that the Java library will send their JSON messages to.
+        /// The method that the Java plugin will send their JSON messages to.
+        /// All objects are sent in JSON format.
         /// </summary>
-        /// <param name="jsonMessage">The <see cref="BleObject"/> in JSON format.</param>
         public void OnBleMessage(string jsonMessage)
         {
-            Debug.Log("Received JSON: " + jsonMessage);
+
+            LogMessage("Received JSON: " + jsonMessage);
+
             BleObject obj = JsonUtility.FromJson<BleObject>(jsonMessage);
+
+            // Trigger the OnErrorReceived Event if there is error message in received obj
+            // All functions that are bound to OnErrorReceived Event will be called
             if (obj.HasError)
             {
                 OnErrorReceived?.Invoke(obj.ErrorMessage);
-                UnityOnErrorReceived?.Invoke(obj.ErrorMessage);
-                Debug.LogError("Error: " + obj.ErrorMessage);
+                LogError("Error: " + obj.ErrorMessage);
             }
+            // Trigger the OnMessageReceived Event if there is no error message in received obj
+            // All functions that are bound to OnMessageReceived Event will be called
             else
             {
                 OnMessageReceived?.Invoke(obj);
-                UnityOnMessageReceived?.Invoke(obj);
-                string decodedMessage = "";
+
+                // Decode the base64 message in obj into string
                 try
                 {
-                    byte[] data = Convert.FromBase64String(obj.Base64Message);  // Base64 decoding
+                    byte[] data = obj.GetByteMessage();
                     decodedMessage = Encoding.UTF8.GetString(data);  // change to string message
                 }
                 catch (FormatException fe)
                 {
-                    Debug.LogError("Base64 String could not be decoded: " + fe.Message);
+                    LogError("Base64 String could not be decoded: " + fe.Message);
                 }
-
-                Debug.Log("Received Message: " + decodedMessage);
+                if (!string.Equals(decodedMessage, "")) // Print out the message if it is not empty
+                {
+                    LogMessage("Received Message: " + decodedMessage); 
+                }
             }
         }
 
         public void LogMessage(string log) => Debug.Log(log);
+        public void LogError(string log) => Debug.LogError(log);
 
-        public delegate void MessageReceived(BleObject obj);
-        public delegate void ErrorReceived(string errorMessage);
+
     }
 }

@@ -3,7 +3,7 @@
     "m_SelectedProcess": {
         "deviceId": "PT19655VA1332904499",
         "name": "com.com.velorexe.UnityBluetoothLowEnergy",
-        "processId": 11558,
+        "processId": 13833,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -702,6 +702,66 @@
             "deviceId": "PT19655VA1332904499",
             "name": "com.com.velorexe.UnityBluetoothLowEnergy",
             "processId": 11558,
+            "exited": false
+        },
+        {
+            "deviceId": "PT19655VA1332904499",
+            "name": "com.com.velorexe.UnityBluetoothLowEnergy",
+            "processId": 11815,
+            "exited": false
+        },
+        {
+            "deviceId": "PT19655VA1332904499",
+            "name": "com.com.velorexe.UnityBluetoothLowEnergy",
+            "processId": 12053,
+            "exited": false
+        },
+        {
+            "deviceId": "PT19655VA1332904499",
+            "name": "com.com.velorexe.UnityBluetoothLowEnergy",
+            "processId": 12280,
+            "exited": false
+        },
+        {
+            "deviceId": "PT19655VA1332904499",
+            "name": "com.com.velorexe.UnityBluetoothLowEnergy",
+            "processId": 12442,
+            "exited": false
+        },
+        {
+            "deviceId": "PT19655VA1332904499",
+            "name": "com.com.velorexe.UnityBluetoothLowEnergy",
+            "processId": 12597,
+            "exited": false
+        },
+        {
+            "deviceId": "PT19655VA1332904499",
+            "name": "com.com.velorexe.UnityBluetoothLowEnergy",
+            "processId": 12787,
+            "exited": false
+        },
+        {
+            "deviceId": "PT19655VA1332904499",
+            "name": "com.com.velorexe.UnityBluetoothLowEnergy",
+            "processId": 12987,
+            "exited": false
+        },
+        {
+            "deviceId": "PT19655VA1332904499",
+            "name": "com.com.velorexe.UnityBluetoothLowEnergy",
+            "processId": 13183,
+            "exited": false
+        },
+        {
+            "deviceId": "PT19655VA1332904499",
+            "name": "com.com.velorexe.UnityBluetoothLowEnergy",
+            "processId": 13558,
+            "exited": false
+        },
+        {
+            "deviceId": "PT19655VA1332904499",
+            "name": "com.com.velorexe.UnityBluetoothLowEnergy",
+            "processId": 13833,
             "exited": false
         }
     ],

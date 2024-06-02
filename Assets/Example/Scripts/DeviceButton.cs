@@ -28,7 +28,6 @@ public class DeviceButton : MonoBehaviour
     public static bool _isConnected = false;
 
     private ConnectToDevice _connectCommand;
-    //private WriteToCharacteristic _writeToCharacteristic;
     
 
     public void Show(string uuid, string name)
@@ -71,4 +70,6 @@ public class DeviceButton : MonoBehaviour
         _isConnected = false;
         _deviceButtonText.text = "Connect";
     }
+
+   
 }

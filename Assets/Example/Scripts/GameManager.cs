@@ -10,7 +10,7 @@ using UnityEngine.UI;
 /// This script mainly focus on the UI logic
 /// </summary>
 
-public class ExampleBleInteractor : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     [SerializeField]
     private Canvas BLEListCanvas;
@@ -24,6 +24,7 @@ public class ExampleBleInteractor : MonoBehaviour
     private Canvas EMGGameCanvas;
 
     private WriteToCharacteristic _writeToCharacteristic;
+    private ConnectToDevice _connectCommand;
 
     /* Replace these Characteristics with YOUR device's characteristics
        "0000" (Service UUID) and "0001"(Characteristics UUID) is a part of "0000" + service + "-0000-1000-8000-00805f9b34fb" by default. */
@@ -43,8 +44,6 @@ public class ExampleBleInteractor : MonoBehaviour
         dataDisplayCanvas.gameObject.SetActive(true);
         ROMGameCanvas.gameObject.SetActive(false);
         EMGGameCanvas.gameObject.SetActive(false);
-        Debug.Log("Data Display Button was clicked!");
-
     }
 
     public void OnROMButtonClicked()
@@ -55,8 +54,6 @@ public class ExampleBleInteractor : MonoBehaviour
         dataDisplayCanvas.gameObject.SetActive(false);
         ROMGameCanvas.gameObject.SetActive(true);
         EMGGameCanvas.gameObject.SetActive(false);
-        Debug.Log("ROM Button was clicked!");
-
     }
 
     public void OnEMGButtonClicked()
@@ -67,29 +64,35 @@ public class ExampleBleInteractor : MonoBehaviour
         dataDisplayCanvas.gameObject.SetActive(false);
         ROMGameCanvas.gameObject.SetActive(false);
         EMGGameCanvas.gameObject.SetActive(true);
-        Debug.Log("EMG Button was clicked!");
-
     }
 
-    public void goBackToMenu()
+    public void goBackToModeMenu()
     {
         BLEDeviceSTOPSendingData();
         modeSelectCanvas.gameObject.SetActive(true);
         BLEListCanvas.gameObject.SetActive(false);
         dataDisplayCanvas.gameObject.SetActive(false);
         ROMGameCanvas.gameObject.SetActive(false);
-        EMGGameCanvas.gameObject.SetActive(false);
-        Debug.Log("Menu Button was clicked!");
+        EMGGameCanvas.gameObject.SetActive(false); 
+    }
+
+    public void goBackToBLEMenu()
+    {
+        modeSelectCanvas.gameObject.SetActive(false);
+        BLEListCanvas.gameObject.SetActive(true);
+        dataDisplayCanvas.gameObject.SetActive(false);
+        ROMGameCanvas.gameObject.SetActive(false);
+        EMGGameCanvas.gameObject.SetActive(false); 
     }
 
 
     #endregion
 
-    
+
 
     private void Start()
     {
-        // Start with the BLE list page
+        // Always start with the BLE list page
         modeSelectCanvas.gameObject.SetActive(false);
         BLEListCanvas.gameObject.SetActive(true);
         dataDisplayCanvas.gameObject.SetActive(false);
@@ -111,6 +114,7 @@ public class ExampleBleInteractor : MonoBehaviour
         }
     }
 
+    #region BLE functions
 
     void BLEDeviceSTARTSendingData()
     {
@@ -124,4 +128,5 @@ public class ExampleBleInteractor : MonoBehaviour
         _writeToCharacteristic.Start();
     }
 
+    #endregion
 }

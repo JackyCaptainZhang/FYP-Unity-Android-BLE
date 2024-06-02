@@ -25,7 +25,6 @@ public class BLEListCanvas : MonoBehaviour
     private Canvas modeSelectCanvas;
     [SerializeField]
     private Canvas bleListCanvas;
-
     [SerializeField]
     private int _scanTime = 5;
 
@@ -40,13 +39,6 @@ public class BLEListCanvas : MonoBehaviour
     private string service_UUID = "0000";
     private string characteristic_UUID = "0001";
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-
-    }
 
     // Update is called once per frame
     void Update()
@@ -63,7 +55,7 @@ public class BLEListCanvas : MonoBehaviour
 
         if (!_isSubscribed)
         {
-            _buttonText.text = "Subscribe";
+            _buttonText.text = "Enter Game";
         }
         
         if (!DeviceButton._isConnected)
@@ -89,12 +81,20 @@ public class BLEListCanvas : MonoBehaviour
         {
             SubscribeToExampleService();
         }
+        else
+        {
+            bleListCanvas.gameObject.SetActive(false);
+            modeSelectCanvas.gameObject.SetActive(true);
+        }
     }
 
 
 
     #region BLE functions
 
+    /// <summary>
+    /// Function that scan for device and update the BLE device list.
+    /// </summary>
     void ScanForDevices()
     {
         if (!_isScanning)
@@ -117,8 +117,10 @@ public class BLEListCanvas : MonoBehaviour
         button.Show(name, device);
     }
 
-
-    void SubscribeToExampleService() // Subscribe function
+    /// <summary>
+    /// Subscribe function.
+    /// </summary>
+    void SubscribeToExampleService()
     {
         _subscribeToCharacteristic = new SubscribeToCharacteristic(DeviceButton.connectted_deviceUuid, service_UUID, characteristic_UUID);
         _subscribeToCharacteristic.Start();
@@ -127,7 +129,10 @@ public class BLEListCanvas : MonoBehaviour
         modeSelectCanvas.gameObject.SetActive(true);
     }
 
-    void UnsubscribeFromExampleService() // Unsubscribe function
+    /// <summary>
+    /// Unsubscribe function.
+    /// </summary>
+    void UnsubscribeFromExampleService()
     {
         _isSubscribed = false;
         _subscribeToCharacteristic.End();

@@ -67,7 +67,7 @@
                     case "DisconnectedFromGattServer":
                         {
                             OnDisconnected?.Invoke(obj.Device);
-                            ExampleBleInteractor._isSubscribed = false;
+                            BLEListCanvas._isSubscribed = false;
                         }
                         break;
                 }

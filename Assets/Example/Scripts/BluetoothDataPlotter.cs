@@ -51,20 +51,20 @@ public class BluetoothDataPlotter : MonoBehaviour
     {
         // Get realtime data
         string dataString = BleAdapter.decodedMessage;
+        //  return -1 if no data
         if (string.IsNullOrEmpty(dataString))
         {
-            return -1;  //  return -1 if no data
+            return -1;  
         }
-
         // Convert to float
         if (float.TryParse(dataString, out float result))
         {
             return result;
         }
+        // return -1 if error
         else
-        {
-            Debug.LogWarning("无法解析蓝牙数据: " + dataString);
-            return -1;  // return -1 if error
+        { 
+            return -1;  
         }
     }
 

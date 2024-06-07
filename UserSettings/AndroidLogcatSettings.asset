@@ -3,7 +3,7 @@
     "m_SelectedProcess": {
         "deviceId": "adb-PT19655VA1332904499-ioq3Nx._adb-tls-connect._tcp.",
         "name": "com.com.velorexe.UnityBluetoothLowEnergy",
-        "processId": 11183,
+        "processId": 11469,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -1098,6 +1098,12 @@
             "deviceId": "adb-PT19655VA1332904499-ioq3Nx._adb-tls-connect._tcp.",
             "name": "com.com.velorexe.UnityBluetoothLowEnergy",
             "processId": 11183,
+            "exited": false
+        },
+        {
+            "deviceId": "adb-PT19655VA1332904499-ioq3Nx._adb-tls-connect._tcp.",
+            "name": "com.com.velorexe.UnityBluetoothLowEnergy",
+            "processId": 11469,
             "exited": false
         }
     ],

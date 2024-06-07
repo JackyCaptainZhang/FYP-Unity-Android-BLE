@@ -57,7 +57,7 @@ namespace Android.BLE.Commands
 
         public override void Start()
         {
-            string command = "writeToGattCharacteristic";
+            string command = CustomGatt ? "writeToCustomGattCharacteristic" : "writeToGattCharacteristic";
             BleManager.SendCommand(command, DeviceAddress, Service, Characteristic, Base64Data);
         }
     }

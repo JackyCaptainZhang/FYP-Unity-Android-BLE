@@ -4,6 +4,7 @@ using Android.BLE.Commands;
 using UnityEngine.Android;
 using System.Text;
 using UnityEngine.UI;
+using System;
 
 
 /// <summary>
@@ -26,10 +27,17 @@ public class GameManager : MonoBehaviour
     private WriteToCharacteristic _writeToCharacteristic;
     private ConnectToDevice _connectCommand;
 
-    /* Replace these Characteristics with YOUR device's characteristics
-       "0000" (Service UUID) and "0001"(Characteristics UUID) is a part of "0000" + service + "-0000-1000-8000-00805f9b34fb" by default. */
-    private string service_UUID = "0000";
-    private string characteristic_UUID = "0001";
+    
+   
+    // Replace these Characteristics with YOUR device's characteristics
+    public static string service_UUID = CleanUUID("6E400001-B5A3-F393-­E0A9-­E50E24DCCA9E");
+    public static string characteristic_Write_UUID = CleanUUID("6E400002-B5A3-F393-­E0A9-­E50E24DCCA9E");
+    public static string characteristic_Notify_UUID = CleanUUID("6E400003-B5A3-F393-­E0A9-­E50E24DCCA9E");
+
+    public static string CleanUUID(string uuid)
+    {
+        return uuid.Replace("\u00AD", "");
+    }
 
     /// <summary>
     /// Define different click actions for different senerio
@@ -118,13 +126,15 @@ public class GameManager : MonoBehaviour
 
     void BLEDeviceSTARTSendingData()
     {
-        _writeToCharacteristic = new WriteToCharacteristic(DeviceButton.connectted_deviceUuid, service_UUID, characteristic_UUID, "Start sending data");
+        string base64Data = Convert.ToBase64String(Encoding.UTF8.GetBytes("START"));
+        _writeToCharacteristic = new WriteToCharacteristic(DeviceButton.connectted_deviceUuid, service_UUID, characteristic_Write_UUID, base64Data, true);
         _writeToCharacteristic.Start();
     }
 
     void BLEDeviceSTOPSendingData()
     {
-        _writeToCharacteristic = new WriteToCharacteristic(DeviceButton.connectted_deviceUuid, service_UUID, characteristic_UUID, "Stop sending data");
+        string base64Data = Convert.ToBase64String(Encoding.UTF8.GetBytes("END"));
+        _writeToCharacteristic = new WriteToCharacteristic(DeviceButton.connectted_deviceUuid, service_UUID, characteristic_Write_UUID, base64Data, true);
         _writeToCharacteristic.Start();
     }
 

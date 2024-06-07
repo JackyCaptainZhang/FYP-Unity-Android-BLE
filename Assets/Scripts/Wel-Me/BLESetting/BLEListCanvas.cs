@@ -34,10 +34,6 @@ public class BLEListCanvas : MonoBehaviour
     private SubscribeToCharacteristic _subscribeToCharacteristic;
     public static bool _isSubscribed = false;
 
-    /* Replace these Characteristics with YOUR device's characteristics
-       "0000" (Service UUID) and "0001"(Characteristics UUID) is a part of "0000" + service + "-0000-1000-8000-00805f9b34fb" by default. */
-    private string service_UUID = "0000";
-    private string characteristic_UUID = "0001";
 
 
     // Update is called once per frame
@@ -122,7 +118,7 @@ public class BLEListCanvas : MonoBehaviour
     /// </summary>
     void SubscribeToExampleService()
     {
-        _subscribeToCharacteristic = new SubscribeToCharacteristic(DeviceButton.connectted_deviceUuid, service_UUID, characteristic_UUID);
+        _subscribeToCharacteristic = new SubscribeToCharacteristic(DeviceButton.connectted_deviceUuid, GameManager.service_UUID, GameManager.characteristic_Notify_UUID, true);
         _subscribeToCharacteristic.Start();
         _isSubscribed = true;
         bleListCanvas.gameObject.SetActive(false);

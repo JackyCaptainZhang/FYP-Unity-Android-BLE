@@ -17,6 +17,8 @@ namespace Android.BLE.Commands
         // The Characteristic to write the message to.
         public readonly string Characteristic;
 
+        private readonly bool CustomGatt = true;
+
 
         // Subscribes to a given BLE Characteristic.
         public SubscribeToCharacteristic(string deviceAddress, string service, string characteristic, bool customGatt = false) : base(true, true)
@@ -31,15 +33,15 @@ namespace Android.BLE.Commands
 
         public override void Start()
         {
-            string command = "subscribeToGattCharacteristic";
+            string command = CustomGatt ? "subscribeToCustomGattCharacteristic" : "subscribeToGattCharacteristic";
             BleManager.SendCommand(command, DeviceAddress, Service, Characteristic);
         }
 
         public override void End()
         {
-            string command = "unsubscribeFromGattCharacteristic";
+            string command = CustomGatt ? "unsubscribeFromCustomGattCharacteristic" : "unsubscribeFromGattCharacteristic";
             BleManager.SendCommand(command, DeviceAddress, Service, Characteristic);
         }
 
-        }
+    }
     }

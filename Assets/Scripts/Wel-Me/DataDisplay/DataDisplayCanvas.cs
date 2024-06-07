@@ -6,7 +6,7 @@ using UnityEngine.Android;
 using System.Text;
 using UnityEngine.UI;
 
-public class BluetoothDataPlotter : MonoBehaviour
+public class DataDisplayCanvas : MonoBehaviour
 {
     public RawImage chartImage;
     public int maxDataPoints = 100;
@@ -33,9 +33,7 @@ public class BluetoothDataPlotter : MonoBehaviour
     void Update()
     {
         // Get the data stream and update the data queue
-        float newData = GetBluetoothData();
-        if (newData != -1)  // -1 indicates no data or data error
-        {
+        float newData = BleDataStorage.Float1;
             if (dataQueue.Count >= maxDataPoints)
             {
                 dataQueue.Dequeue();
@@ -44,29 +42,9 @@ public class BluetoothDataPlotter : MonoBehaviour
 
             // Plot
             DrawChart();
-        }
+        
     }
 
-    float GetBluetoothData()
-    {
-        // Get realtime data
-        string dataString = BleAdapter.decodedMessage;
-        //  return -1 if no data
-        if (string.IsNullOrEmpty(dataString))
-        {
-            return -1;  
-        }
-        // Convert to float
-        if (float.TryParse(dataString, out float result))
-        {
-            return result;
-        }
-        // return -1 if error
-        else
-        { 
-            return -1;  
-        }
-    }
 
     void DrawChart()
     {

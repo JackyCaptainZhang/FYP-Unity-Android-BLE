@@ -1,9 +1,9 @@
 {
-    "m_SelectedDeviceId": "adb-PT19655VA1332904499-ioq3Nx._adb-tls-connect._tcp.",
+    "m_SelectedDeviceId": "PT19655VA1332904499",
     "m_SelectedProcess": {
-        "deviceId": "adb-PT19655VA1332904499-ioq3Nx._adb-tls-connect._tcp.",
+        "deviceId": "PT19655VA1332904499",
         "name": "com.com.velorexe.UnityBluetoothLowEnergy",
-        "processId": 11469,
+        "processId": 25099,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -1047,63 +1047,141 @@
             "exited": false
         },
         {
-            "deviceId": "adb-PT19655VA1332904499-ioq3Nx._adb-tls-connect._tcp.",
+            "deviceId": "PT19655VA1332904499",
             "name": "com.com.velorexe.UnityBluetoothLowEnergy",
-            "processId": 22184,
+            "processId": 24833,
+            "exited": false
+        },
+        {
+            "deviceId": "PT19655VA1332904499",
+            "name": "com.com.velorexe.UnityBluetoothLowEnergy",
+            "processId": 25099,
+            "exited": false
+        },
+        {
+            "deviceId": "adb-PT19655VA1332904499-ioq3Nx._adb-tls-connect._tcp.",
+            "name": "com.android.launcher3",
+            "processId": 2064,
             "exited": false
         },
         {
             "deviceId": "adb-PT19655VA1332904499-ioq3Nx._adb-tls-connect._tcp.",
             "name": "com.com.velorexe.UnityBluetoothLowEnergy",
-            "processId": 22945,
+            "processId": 3783,
+            "exited": true
+        },
+        {
+            "deviceId": "adb-PT19655VA1332904499-ioq3Nx._adb-tls-connect._tcp.",
+            "name": "com.com.velorexe.UnityBluetoothLowEnergy",
+            "processId": 4031,
+            "exited": true
+        },
+        {
+            "deviceId": "adb-PT19655VA1332904499-ioq3Nx._adb-tls-connect._tcp.",
+            "name": "com.com.velorexe.UnityBluetoothLowEnergy",
+            "processId": 4627,
+            "exited": true
+        },
+        {
+            "deviceId": "adb-PT19655VA1332904499-ioq3Nx._adb-tls-connect._tcp.",
+            "name": "com.com.velorexe.UnityBluetoothLowEnergy",
+            "processId": 4841,
+            "exited": true
+        },
+        {
+            "deviceId": "adb-PT19655VA1332904499-ioq3Nx._adb-tls-connect._tcp.",
+            "name": "com.com.velorexe.UnityBluetoothLowEnergy",
+            "processId": 5400,
             "exited": false
         },
         {
             "deviceId": "adb-PT19655VA1332904499-ioq3Nx._adb-tls-connect._tcp.",
             "name": "com.com.velorexe.UnityBluetoothLowEnergy",
-            "processId": 15317,
+            "processId": 5794,
             "exited": false
         },
         {
             "deviceId": "adb-PT19655VA1332904499-ioq3Nx._adb-tls-connect._tcp.",
             "name": "com.com.velorexe.UnityBluetoothLowEnergy",
-            "processId": 8109,
+            "processId": 6137,
             "exited": false
         },
         {
             "deviceId": "adb-PT19655VA1332904499-ioq3Nx._adb-tls-connect._tcp.",
             "name": "com.com.velorexe.UnityBluetoothLowEnergy",
-            "processId": 8556,
+            "processId": 10476,
             "exited": false
         },
         {
             "deviceId": "adb-PT19655VA1332904499-ioq3Nx._adb-tls-connect._tcp.",
             "name": "com.com.velorexe.UnityBluetoothLowEnergy",
-            "processId": 8857,
+            "processId": 12423,
             "exited": false
         },
         {
             "deviceId": "adb-PT19655VA1332904499-ioq3Nx._adb-tls-connect._tcp.",
             "name": "com.com.velorexe.UnityBluetoothLowEnergy",
-            "processId": 10579,
+            "processId": 12699,
             "exited": false
         },
         {
             "deviceId": "adb-PT19655VA1332904499-ioq3Nx._adb-tls-connect._tcp.",
             "name": "com.com.velorexe.UnityBluetoothLowEnergy",
-            "processId": 10891,
+            "processId": 12892,
             "exited": false
         },
         {
             "deviceId": "adb-PT19655VA1332904499-ioq3Nx._adb-tls-connect._tcp.",
             "name": "com.com.velorexe.UnityBluetoothLowEnergy",
-            "processId": 11183,
+            "processId": 13256,
             "exited": false
         },
         {
             "deviceId": "adb-PT19655VA1332904499-ioq3Nx._adb-tls-connect._tcp.",
             "name": "com.com.velorexe.UnityBluetoothLowEnergy",
-            "processId": 11469,
+            "processId": 13460,
+            "exited": false
+        },
+        {
+            "deviceId": "adb-PT19655VA1332904499-ioq3Nx._adb-tls-connect._tcp.",
+            "name": "com.com.velorexe.UnityBluetoothLowEnergy",
+            "processId": 13997,
+            "exited": false
+        },
+        {
+            "deviceId": "adb-PT19655VA1332904499-ioq3Nx._adb-tls-connect._tcp.",
+            "name": "com.com.velorexe.UnityBluetoothLowEnergy",
+            "processId": 14297,
+            "exited": false
+        },
+        {
+            "deviceId": "adb-PT19655VA1332904499-ioq3Nx._adb-tls-connect._tcp.",
+            "name": "com.com.velorexe.UnityBluetoothLowEnergy",
+            "processId": 14545,
+            "exited": false
+        },
+        {
+            "deviceId": "adb-PT19655VA1332904499-ioq3Nx._adb-tls-connect._tcp.",
+            "name": "com.com.velorexe.UnityBluetoothLowEnergy",
+            "processId": 7490,
+            "exited": false
+        },
+        {
+            "deviceId": "adb-PT19655VA1332904499-ioq3Nx._adb-tls-connect._tcp.",
+            "name": "com.com.velorexe.UnityBluetoothLowEnergy",
+            "processId": 7772,
+            "exited": false
+        },
+        {
+            "deviceId": "adb-PT19655VA1332904499-ioq3Nx._adb-tls-connect._tcp.",
+            "name": "com.com.velorexe.UnityBluetoothLowEnergy",
+            "processId": 8225,
+            "exited": false
+        },
+        {
+            "deviceId": "adb-PT19655VA1332904499-ioq3Nx._adb-tls-connect._tcp.",
+            "name": "com.com.velorexe.UnityBluetoothLowEnergy",
+            "processId": 8469,
             "exited": false
         }
     ],

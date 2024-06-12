@@ -4,16 +4,16 @@ using UnityEngine.UI;
 public class BirdController : MonoBehaviour
 {
     public RectTransform bird;
-    public float minY = -300f;
-    public float maxY = 300f;
+    public float minY = -600f;
+    public float maxY = 600f;
 
-    private Image birdImage; // Use Image instead of SpriteRenderer
-    public Sprite[] sprites; // Corrected the spelling mistake
+    private Image birdImage;
+    public Sprite[] sprites;
     private int spritesIndex = 0;
 
     private void Awake()
     {
-        birdImage = bird.GetComponent<Image>(); // Get the Image component from the RectTransform
+        birdImage = bird.GetComponent<Image>(); // Get the Image component
     }
 
     private void Start()
@@ -23,10 +23,19 @@ public class BirdController : MonoBehaviour
 
     private void Update()
     {
-        // Assuming BleDataStorage.Float1 is in the range of 0 to 100
+        // BleDataStorage.Float1 is in the range of 0 to 100
         float normalizedValue = Mathf.Clamp01(BleDataStorage.Float1 / 100f);
         float yPosition = Mathf.Lerp(minY, maxY, normalizedValue);
+
+        // Print debug information
+       // Debug.Log($"BleDataStorage.Float1: {BleDataStorage.Float1}");
+        //Debug.Log($"Normalized Value: {normalizedValue}");
+       // Debug.Log($"Calculated yPosition: {yPosition}");
+
         bird.anchoredPosition = new Vector2(bird.anchoredPosition.x, yPosition);
+
+        // Debug log to print the bird's position
+        //Debug.Log($"Bird Position: {bird.anchoredPosition}");
     }
 
     private void AnimateSprite()
@@ -37,5 +46,17 @@ public class BirdController : MonoBehaviour
             spritesIndex = 0; // Reset the index to loop through the sprites
         }
         birdImage.sprite = sprites[spritesIndex]; // Set the sprite to the Image component
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        ROMGameCanvas romGameCanvas = FindObjectOfType<ROMGameCanvas>();
+        if (collision.gameObject.tag == "Obstacle")
+        {
+            romGameCanvas.GameOver();
+        }else if(collision.gameObject.tag == "Scoring")
+        {
+            romGameCanvas.IncreaseScore();
+        }
     }
 }

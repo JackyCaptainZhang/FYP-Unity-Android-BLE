@@ -83,8 +83,8 @@ namespace Android.BLE
             {
                 string hex1 = cleanedMessage.Substring(0, 8);
                 string hex2 = cleanedMessage.Substring(8, 8);
-                LogMessage("Hex1: " + hex1);
-                LogMessage("Hex2: " + hex2);
+                //LogMessage("Hex1: " + hex1);
+                //LogMessage("Hex2: " + hex2);
 
                 float float1 = HexToFloat(hex1);
                 float float2 = HexToFloat(hex2);
@@ -93,12 +93,12 @@ namespace Android.BLE
                 BleDataStorage.Float1 = float1;
                 BleDataStorage.Float2 = float2;
 
-                LogMessage("Float1: " + float1);
-                LogMessage("Float2: " + float2);
+                //LogMessage("Float1: " + float1);
+                //LogMessage("Float2: " + float2);
             }
             else
             {
-                LogError("The message does not contain enough data for two hex values.");
+                //LogError("The message does not contain enough data for two hex values.");
             }
         }
 

@@ -25,10 +25,10 @@ public class GameManager : MonoBehaviour
     private Canvas EMGGameCanvas;
 
     private WriteToCharacteristic _writeToCharacteristic;
-    private ConnectToDevice _connectCommand;
 
-    
-   
+
+
+
     // Replace these Characteristics with YOUR device's characteristics
     public static string service_UUID = CleanUUID("6E400001-B5A3-F393-­E0A9-­E50E24DCCA9E");
     public static string characteristic_Write_UUID = CleanUUID("6E400002-B5A3-F393-­E0A9-­E50E24DCCA9E");
@@ -62,6 +62,7 @@ public class GameManager : MonoBehaviour
         dataDisplayCanvas.gameObject.SetActive(false);
         ROMGameCanvas.gameObject.SetActive(true);
         EMGGameCanvas.gameObject.SetActive(false);
+        DifficultyManager.GameMode = true;
     }
 
     public void OnEMGButtonClicked()
@@ -72,6 +73,8 @@ public class GameManager : MonoBehaviour
         dataDisplayCanvas.gameObject.SetActive(false);
         ROMGameCanvas.gameObject.SetActive(false);
         EMGGameCanvas.gameObject.SetActive(true);
+        DifficultyManager.GameMode = true;
+        
     }
 
     public void goBackToModeMenu()
@@ -81,7 +84,8 @@ public class GameManager : MonoBehaviour
         BLEListCanvas.gameObject.SetActive(false);
         dataDisplayCanvas.gameObject.SetActive(false);
         ROMGameCanvas.gameObject.SetActive(false);
-        EMGGameCanvas.gameObject.SetActive(false); 
+        EMGGameCanvas.gameObject.SetActive(false);
+        DifficultyManager.GameMode = false;
     }
 
     public void goBackToBLEMenu()
@@ -90,7 +94,7 @@ public class GameManager : MonoBehaviour
         BLEListCanvas.gameObject.SetActive(true);
         dataDisplayCanvas.gameObject.SetActive(false);
         ROMGameCanvas.gameObject.SetActive(false);
-        EMGGameCanvas.gameObject.SetActive(false); 
+        EMGGameCanvas.gameObject.SetActive(false);
     }
 
 
@@ -106,6 +110,7 @@ public class GameManager : MonoBehaviour
         dataDisplayCanvas.gameObject.SetActive(false);
         ROMGameCanvas.gameObject.SetActive(false);
         EMGGameCanvas.gameObject.SetActive(false);
+        DifficultyManager.GameMode = false;
     }
 
 
@@ -119,6 +124,7 @@ public class GameManager : MonoBehaviour
             dataDisplayCanvas.gameObject.SetActive(false);
             ROMGameCanvas.gameObject.SetActive(false);
             EMGGameCanvas.gameObject.SetActive(false);
+            DifficultyManager.GameMode = false;
         }
     }
 

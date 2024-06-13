@@ -17,6 +17,7 @@ public class DataDisplayCanvas : MonoBehaviour
     private int width = 500;
     private int height = 200;
 
+
     void Start()
     {
         // Initialize data queue

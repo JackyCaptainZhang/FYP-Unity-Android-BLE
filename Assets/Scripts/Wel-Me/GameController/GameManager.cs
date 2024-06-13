@@ -8,7 +8,7 @@ using System;
 
 
 /// <summary>
-/// This script mainly focus on the UI logic
+/// This script mainly focus on the UI switch logic
 /// </summary>
 
 public class GameManager : MonoBehaviour
@@ -74,7 +74,6 @@ public class GameManager : MonoBehaviour
         ROMGameCanvas.gameObject.SetActive(false);
         EMGGameCanvas.gameObject.SetActive(true);
         DifficultyManager.GameMode = true;
-        
     }
 
     public void goBackToModeMenu()

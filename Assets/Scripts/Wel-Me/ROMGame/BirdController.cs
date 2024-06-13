@@ -4,8 +4,8 @@ using UnityEngine.UI;
 public class BirdController : MonoBehaviour
 {
     public RectTransform bird;
-    public float minY = -600f;
-    public float maxY = 600f;
+    public float minY;
+    public float maxY;
 
     private Image birdImage;
     public Sprite[] sprites;
@@ -18,7 +18,7 @@ public class BirdController : MonoBehaviour
 
     private void Start()
     {
-        InvokeRepeating(nameof(AnimateSprite), 0.15f, 0.15f); // Corrected the parameters
+        InvokeRepeating(nameof(AnimateSprite), 0.15f, 0.15f);
     }
 
     private void Update()
@@ -32,6 +32,9 @@ public class BirdController : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Birds animation.
+    /// </summary>
     private void AnimateSprite()
     {
         spritesIndex++;
@@ -42,6 +45,9 @@ public class BirdController : MonoBehaviour
         birdImage.sprite = sprites[spritesIndex]; // Set the sprite to the Image component
     }
 
+    /// <summary>
+    /// Detect the collision type and call the corresponding function.
+    /// </summary>
     private void OnTriggerEnter2D(Collider2D collision)
     {
         ROMGameCanvas romGameCanvas = FindObjectOfType<ROMGameCanvas>();

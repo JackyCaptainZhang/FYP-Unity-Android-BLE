@@ -5,9 +5,9 @@ public class PipeSpawner : MonoBehaviour
     public GameObject pipePrefab;
     public Canvas canvas;
     public RectTransform canvasRect;
-    public float spawnRate = 0.1f; 
-    public float minY = -1000f; 
-    public float maxY = 1000f;
+    public float spawnRate; 
+    public float minY; 
+    public float maxX;
     
 
     void Start()

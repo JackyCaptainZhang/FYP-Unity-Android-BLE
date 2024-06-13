@@ -27,15 +27,9 @@ public class BirdController : MonoBehaviour
         float normalizedValue = Mathf.Clamp01(BleDataStorage.Float1 / 100f);
         float yPosition = Mathf.Lerp(minY, maxY, normalizedValue);
 
-        // Print debug information
-       // Debug.Log($"BleDataStorage.Float1: {BleDataStorage.Float1}");
-        //Debug.Log($"Normalized Value: {normalizedValue}");
-       // Debug.Log($"Calculated yPosition: {yPosition}");
 
         bird.anchoredPosition = new Vector2(bird.anchoredPosition.x, yPosition);
 
-        // Debug log to print the bird's position
-        //Debug.Log($"Bird Position: {bird.anchoredPosition}");
     }
 
     private void AnimateSprite()

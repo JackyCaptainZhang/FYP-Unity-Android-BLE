@@ -7,7 +7,7 @@ public class PipeSpawner : MonoBehaviour
     public RectTransform canvasRect;
     public float spawnRate; 
     public float minY; 
-    public float maxX;
+    public float maxY;
     
 
     void Start()

@@ -21,13 +21,25 @@ public class BirdController : MonoBehaviour
         InvokeRepeating(nameof(AnimateSprite), 0.15f, 0.15f);
     }
 
+    /// <summary>
+    /// Update the position of the bird.
+    /// </summary>
     private void Update()
     {
-        // BleDataStorage.Float1 is in the range of 0 to 100
-        float normalizedValue = Mathf.Clamp01(BleDataStorage.Float1 / 100f);
+
+        // Calculate the range of ROM data
+        float ROMDataRange = BleDataStorage.MaxROM - BleDataStorage.MinROM;
+
+        // Clamp the received ROM data value within the MinROM and MaxROM range
+        float clampedValue = Mathf.Clamp(BleDataStorage.Float1, BleDataStorage.MinROM, BleDataStorage.MaxROM);
+
+        // Normalize the clamped value to a range between 0 and 1
+        float normalizedValue = (clampedValue - BleDataStorage.MinROM) / ROMDataRange;
+
+        // Interpolate the normalized value to get the bird's y position between minY and maxY
         float yPosition = Mathf.Lerp(minY, maxY, normalizedValue);
 
-
+        // Update the bird's position
         bird.anchoredPosition = new Vector2(bird.anchoredPosition.x, yPosition);
 
     }

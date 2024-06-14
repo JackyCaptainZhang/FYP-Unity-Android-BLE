@@ -22,7 +22,7 @@ public class BLEListCanvas : MonoBehaviour
     [SerializeField]
     private Text _buttonText;
     [SerializeField]
-    private Canvas modeSelectCanvas;
+    private Canvas CalibrationCanvas;
     [SerializeField]
     private Canvas bleListCanvas;
     [SerializeField]
@@ -33,10 +33,14 @@ public class BLEListCanvas : MonoBehaviour
     private ReadFromCharacteristic _readFromCharacteristic;
     private SubscribeToCharacteristic _subscribeToCharacteristic;
     public static bool _isSubscribed = false;
+    private GameManager gameManager;
 
 
+    private void OnEnable()
+    {
+        gameManager = FindObjectOfType<GameManager>();
+    }
 
-    // Update is called once per frame
     void Update()
     {
         if (_isScanning)
@@ -51,7 +55,7 @@ public class BLEListCanvas : MonoBehaviour
 
         if (!_isSubscribed)
         {
-            _buttonText.text = "Enter Game";
+            _buttonText.text = "Enter Calibration";
         }
         
         if (!DeviceButton._isConnected)
@@ -76,11 +80,6 @@ public class BLEListCanvas : MonoBehaviour
         else if (!_isSubscribed)
         {
             SubscribeToExampleService();
-        }
-        else
-        {
-            bleListCanvas.gameObject.SetActive(false);
-            modeSelectCanvas.gameObject.SetActive(true);
         }
     }
 
@@ -121,19 +120,8 @@ public class BLEListCanvas : MonoBehaviour
         _subscribeToCharacteristic = new SubscribeToCharacteristic(DeviceButton.connectted_deviceUuid, GameManager.service_UUID, GameManager.characteristic_Notify_UUID, true);
         _subscribeToCharacteristic.Start();
         _isSubscribed = true;
-        bleListCanvas.gameObject.SetActive(false);
-        modeSelectCanvas.gameObject.SetActive(true);
+        gameManager.calibrateBTN();
     }
-
-    /// <summary>
-    /// Unsubscribe function.
-    /// </summary>
-    void UnsubscribeFromExampleService()
-    {
-        _isSubscribed = false;
-        _subscribeToCharacteristic.End();
-    }
-
 
     #endregion
 

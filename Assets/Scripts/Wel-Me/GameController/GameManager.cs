@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
     private Canvas ROMGameCanvas;
     [SerializeField]
     private Canvas EMGGameCanvas;
+    [SerializeField]
+    private Canvas CalibrationCanvas;
 
     private WriteToCharacteristic _writeToCharacteristic;
 
@@ -49,9 +51,11 @@ public class GameManager : MonoBehaviour
         BLEDeviceSTARTSendingData();
         modeSelectCanvas.gameObject.gameObject.SetActive(false);
         BLEListCanvas.gameObject.SetActive(false);
-        dataDisplayCanvas.gameObject.SetActive(true);
         ROMGameCanvas.gameObject.SetActive(false);
         EMGGameCanvas.gameObject.SetActive(false);
+        CalibrationCanvas.gameObject.SetActive(false);
+        dataDisplayCanvas.gameObject.SetActive(true);
+        DifficultyManager.GameMode = false;
     }
 
     public void OnROMButtonClicked()
@@ -60,8 +64,9 @@ public class GameManager : MonoBehaviour
         modeSelectCanvas.gameObject.SetActive(false);
         BLEListCanvas.gameObject.SetActive(false);
         dataDisplayCanvas.gameObject.SetActive(false);
-        ROMGameCanvas.gameObject.SetActive(true);
+        CalibrationCanvas.gameObject.SetActive(false);
         EMGGameCanvas.gameObject.SetActive(false);
+        ROMGameCanvas.gameObject.SetActive(true);
         DifficultyManager.GameMode = true;
     }
 
@@ -71,6 +76,7 @@ public class GameManager : MonoBehaviour
         modeSelectCanvas.gameObject.SetActive(false);
         BLEListCanvas.gameObject.SetActive(false);
         dataDisplayCanvas.gameObject.SetActive(false);
+        CalibrationCanvas.gameObject.SetActive(false);
         ROMGameCanvas.gameObject.SetActive(false);
         EMGGameCanvas.gameObject.SetActive(true);
         DifficultyManager.GameMode = true;
@@ -79,21 +85,35 @@ public class GameManager : MonoBehaviour
     public void goBackToModeMenu()
     {
         BLEDeviceSTOPSendingData();
-        modeSelectCanvas.gameObject.SetActive(true);
         BLEListCanvas.gameObject.SetActive(false);
         dataDisplayCanvas.gameObject.SetActive(false);
         ROMGameCanvas.gameObject.SetActive(false);
+        CalibrationCanvas.gameObject.SetActive(false);
         EMGGameCanvas.gameObject.SetActive(false);
+        modeSelectCanvas.gameObject.SetActive(true);
         DifficultyManager.GameMode = false;
     }
 
     public void goBackToBLEMenu()
     {
         modeSelectCanvas.gameObject.SetActive(false);
-        BLEListCanvas.gameObject.SetActive(true);
         dataDisplayCanvas.gameObject.SetActive(false);
         ROMGameCanvas.gameObject.SetActive(false);
         EMGGameCanvas.gameObject.SetActive(false);
+        CalibrationCanvas.gameObject.SetActive(false);
+        BLEListCanvas.gameObject.SetActive(true);
+        DifficultyManager.GameMode = false;
+    }
+
+    public void calibrateBTN()
+    {
+        modeSelectCanvas.gameObject.SetActive(false);
+        BLEListCanvas.gameObject.SetActive(false);
+        dataDisplayCanvas.gameObject.SetActive(false);
+        ROMGameCanvas.gameObject.SetActive(false);
+        EMGGameCanvas.gameObject.SetActive(false);
+        CalibrationCanvas.gameObject.SetActive(true);
+        DifficultyManager.GameMode = false;
     }
 
 
@@ -105,10 +125,11 @@ public class GameManager : MonoBehaviour
     {
         // Always start with the BLE list page
         modeSelectCanvas.gameObject.SetActive(false);
-        BLEListCanvas.gameObject.SetActive(true);
         dataDisplayCanvas.gameObject.SetActive(false);
         ROMGameCanvas.gameObject.SetActive(false);
         EMGGameCanvas.gameObject.SetActive(false);
+        CalibrationCanvas.gameObject.SetActive(false);
+        BLEListCanvas.gameObject.SetActive(true);
         DifficultyManager.GameMode = false;
     }
 
@@ -119,24 +140,25 @@ public class GameManager : MonoBehaviour
         if (!DeviceButton._isConnected)
         {
             modeSelectCanvas.gameObject.SetActive(false);
-            BLEListCanvas.gameObject.SetActive(true);
             dataDisplayCanvas.gameObject.SetActive(false);
             ROMGameCanvas.gameObject.SetActive(false);
             EMGGameCanvas.gameObject.SetActive(false);
+            CalibrationCanvas.gameObject.SetActive(false);
+            BLEListCanvas.gameObject.SetActive(true);
             DifficultyManager.GameMode = false;
         }
     }
 
     #region BLE functions
 
-    void BLEDeviceSTARTSendingData()
+    public void BLEDeviceSTARTSendingData()
     {
         string base64Data = Convert.ToBase64String(Encoding.UTF8.GetBytes("START"));
         _writeToCharacteristic = new WriteToCharacteristic(DeviceButton.connectted_deviceUuid, service_UUID, characteristic_Write_UUID, base64Data, true);
         _writeToCharacteristic.Start();
     }
 
-    void BLEDeviceSTOPSendingData()
+    public void BLEDeviceSTOPSendingData()
     {
         string base64Data = Convert.ToBase64String(Encoding.UTF8.GetBytes("END"));
         _writeToCharacteristic = new WriteToCharacteristic(DeviceButton.connectted_deviceUuid, service_UUID, characteristic_Write_UUID, base64Data, true);

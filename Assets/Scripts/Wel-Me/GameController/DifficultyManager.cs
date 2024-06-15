@@ -8,10 +8,13 @@ public class DifficultyManager : MonoBehaviour
     public static int difficultyLevel;
     public Text ROMDifficultyText;
 
-    private float maxSpawnRate = 5.0f;
-    private float minSpawnRate = 2.0f;
-    private float maxMoveSpeed = 30f;
-    private float minMoveSpeed = 10f;
+    // Set the limits
+    private float maxSpawnRate = 5.1f;
+    private float minSpawnRate = 3.1f;
+    private float maxMoveSpeed = 31f;
+    private float minMoveSpeed = 6f;
+
+    // Flags
     private int scoreIncrement = 5;
     private int gameoverIncrement = 2;
     private bool increasedDifficulty = false;
@@ -46,8 +49,7 @@ public class DifficultyManager : MonoBehaviour
         {
             if (!increasedDifficulty)
             {
-                difficultyLevel += 1;
-                ROMDifficultyText.text = "Level: " + difficultyLevel.ToString();
+                ROMGameCanvas.gameoverTimeROM = 0;                
                 ROMGameHarder();
                 increasedDifficulty = true;
             }
@@ -58,20 +60,12 @@ public class DifficultyManager : MonoBehaviour
         }
 
         // Decrease difficulty logic.
-        // Is triggered each time the gameoverTimeROM increment 2.
+        // Is triggered each time the user gameover twice in current difficulty level.
         if (ROMGameCanvas.gameoverTimeROM != 0f && ROMGameCanvas.gameoverTimeROM % gameoverIncrement == 0)
         {
             if (!decreasedDifficulty)
-            {
-                if (difficultyLevel > 0)
-                {
-                    difficultyLevel -= 1;
-                }
-                else
-                {
-                    difficultyLevel = 0;
-                }
-                ROMDifficultyText.text = "Level: " + difficultyLevel.ToString();
+            { 
+                ROMGameCanvas.gameoverTimeROM = 0;
                 ROMGameEasier();
                 decreasedDifficulty = true;
             }
@@ -97,12 +91,17 @@ public class DifficultyManager : MonoBehaviour
         {
             PipeMovement.speed += 2f;
         }
+        if (PipeSpawner.spawnRate < maxSpawnRate || PipeMovement.speed < maxMoveSpeed)
+        {
+            difficultyLevel += 1;
+            ROMDifficultyText.text = "Level: " + difficultyLevel.ToString();
+        }
     }
 
     /// <summary>
     /// Method that makes the ROM game easier.
     /// Decrease the spawn rate (-0.1) and the moving speed (-2) of the pipes.
-    /// Is triggered each time the gameoverTimeROM increment 2.
+    /// Is triggered each time the user gameover twice in current difficulty level.
     /// </summary>
     private void ROMGameEasier()
     {
@@ -113,6 +112,11 @@ public class DifficultyManager : MonoBehaviour
         if (PipeMovement.speed > minMoveSpeed)
         {
             PipeMovement.speed -= 2f;
+        }
+        if(PipeSpawner.spawnRate > minSpawnRate || PipeMovement.speed > minMoveSpeed)
+        {
+            difficultyLevel -= 1;
+            ROMDifficultyText.text = "Level: " + difficultyLevel.ToString();
         }
     }
 

@@ -3137,6 +3137,7 @@ MonoBehaviour:
   EMGDataText: {fileID: 642178995}
   calibrationResultText: {fileID: 1207409701}
   confirmButton: {fileID: 1076467003}
+  confirmButtonText: {fileID: 1370639141}
 --- !u!114 &969610086
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3237,8 +3238,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -376}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: -0.0024986, y: -376}
+  m_SizeDelta: {x: 207.3, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1076467005
 MonoBehaviour:
@@ -5063,7 +5064,7 @@ MonoBehaviour:
   playButton: {fileID: 883427050}
   gameOver: {fileID: 659554449}
   highestScoreText: {fileID: 854905465}
-  ROMDifficultyText: {fileID: 0}
+  ROMDifficultyText: {fileID: 730934726}
 --- !u!222 &1600812353
 CanvasRenderer:
   m_ObjectHideFlags: 0

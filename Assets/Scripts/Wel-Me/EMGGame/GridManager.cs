@@ -17,7 +17,7 @@ public class NineGridManager : MonoBehaviour
     {
         CalculateThresholds();
         ResetCovers();
-        //Time.timeScale = 1;
+        Time.timeScale = 1;
         currentIndex = -1;
         timer = 0f; 
     }
@@ -50,8 +50,6 @@ public class NineGridManager : MonoBehaviour
             // Reset the timer after revealing the cover
             timer = 0f; 
         }
-
-        Debug.Log($"Current index: {currentIndex}, Timer: {timer}");
     }
 
     /// <summary>

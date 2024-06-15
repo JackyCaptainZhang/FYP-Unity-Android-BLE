@@ -1,10 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Android.BLE;
 using Android.BLE.Commands;
-using UnityEngine.Android;
-using System.Text;
 using UnityEngine.UI;
 
 
@@ -30,7 +26,6 @@ public class BLEListCanvas : MonoBehaviour
 
     private float _scanTimer = 0f;
     private bool _isScanning = false;
-    private ReadFromCharacteristic _readFromCharacteristic;
     private SubscribeToCharacteristic _subscribeToCharacteristic;
     public static bool _isSubscribed = false;
     private GameManager gameManager;

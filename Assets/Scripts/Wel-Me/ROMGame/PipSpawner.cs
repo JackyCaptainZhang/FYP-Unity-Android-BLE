@@ -5,32 +5,13 @@ public class PipeSpawner : MonoBehaviour
     public GameObject pipePrefab;
     public Canvas canvas;
     public RectTransform canvasRect;
-    public float spawnRate; 
+    public static float spawnRate = 3.5f; 
     public float minY; 
     public float maxY;
     
 
     void Start()
-    {
-        
-        if (canvas == null)
-        {
-            Debug.LogError("Canvas is not assigned!");
-            return;
-        }
-
-        if (canvasRect == null)
-        {
-            Debug.LogError("Canvas RectTransform is not assigned!");
-            return;
-        }
-
-        if (pipePrefab == null)
-        {
-            Debug.LogError("Pipe Prefab is not assigned!");
-            return;
-        }
-
+    {  
         if (canvas.renderMode != RenderMode.ScreenSpaceCamera)
         {
             canvas.renderMode = RenderMode.ScreenSpaceCamera;
@@ -47,19 +28,7 @@ public class PipeSpawner : MonoBehaviour
     }
 
     void SpawnPipe()
-    {
-        if (canvasRect == null)
-        {
-            Debug.LogError("Canvas RectTransform is null in SpawnPipe!");
-            return;
-        }
-
-        if (pipePrefab == null)
-        {
-            Debug.LogError("Pipe Prefab is null in SpawnPipe!");
-            return;
-        }
-
+    {       
         // Generate random Y position within specified range
         float yPosition = Random.Range(minY, maxY);
 
@@ -68,12 +37,6 @@ public class PipeSpawner : MonoBehaviour
 
         // Set the position of the new pipe using RectTransform
         RectTransform pipeRectTransform = newPipe.GetComponent<RectTransform>();
-
-        if (pipeRectTransform == null)
-        {
-            Debug.LogError("Pipe Prefab does not have a RectTransform component!");
-            return;
-        }
 
         // Set the pipe to the right most of the canvas
         float canvasWidth = canvasRect.rect.width;

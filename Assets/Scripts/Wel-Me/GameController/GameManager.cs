@@ -1,16 +1,12 @@
 ﻿using UnityEngine;
-using Android.BLE;
 using Android.BLE.Commands;
-using UnityEngine.Android;
 using System.Text;
-using UnityEngine.UI;
 using System;
 
 
 /// <summary>
 /// This script mainly focus on the UI switch logic
 /// </summary>
-
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
@@ -55,7 +51,6 @@ public class GameManager : MonoBehaviour
         EMGGameCanvas.gameObject.SetActive(false);
         CalibrationCanvas.gameObject.SetActive(false);
         dataDisplayCanvas.gameObject.SetActive(true);
-        DifficultyManager.GameMode = false;
     }
 
     public void OnROMButtonClicked()
@@ -67,7 +62,8 @@ public class GameManager : MonoBehaviour
         CalibrationCanvas.gameObject.SetActive(false);
         EMGGameCanvas.gameObject.SetActive(false);
         ROMGameCanvas.gameObject.SetActive(true);
-        DifficultyManager.GameMode = true;
+        DifficultyManager.inROMGame = true;
+        DifficultyManager.inEMGGame = false;
     }
 
     public void OnEMGButtonClicked()
@@ -79,7 +75,8 @@ public class GameManager : MonoBehaviour
         CalibrationCanvas.gameObject.SetActive(false);
         ROMGameCanvas.gameObject.SetActive(false);
         EMGGameCanvas.gameObject.SetActive(true);
-        DifficultyManager.GameMode = true;
+        DifficultyManager.inROMGame = false;
+        DifficultyManager.inEMGGame = true;
     }
 
     public void goBackToModeMenu()
@@ -91,7 +88,8 @@ public class GameManager : MonoBehaviour
         CalibrationCanvas.gameObject.SetActive(false);
         EMGGameCanvas.gameObject.SetActive(false);
         modeSelectCanvas.gameObject.SetActive(true);
-        DifficultyManager.GameMode = false;
+        DifficultyManager.inROMGame = false;
+        DifficultyManager.inEMGGame = false;
     }
 
     public void goBackToBLEMenu()
@@ -102,7 +100,8 @@ public class GameManager : MonoBehaviour
         EMGGameCanvas.gameObject.SetActive(false);
         CalibrationCanvas.gameObject.SetActive(false);
         BLEListCanvas.gameObject.SetActive(true);
-        DifficultyManager.GameMode = false;
+        DifficultyManager.inROMGame = false;
+        DifficultyManager.inEMGGame = false;
     }
 
     public void calibrateBTN()
@@ -113,7 +112,8 @@ public class GameManager : MonoBehaviour
         ROMGameCanvas.gameObject.SetActive(false);
         EMGGameCanvas.gameObject.SetActive(false);
         CalibrationCanvas.gameObject.SetActive(true);
-        DifficultyManager.GameMode = false;
+        DifficultyManager.inROMGame = false;
+        DifficultyManager.inEMGGame = false;
     }
 
 
@@ -130,13 +130,16 @@ public class GameManager : MonoBehaviour
         EMGGameCanvas.gameObject.SetActive(false);
         CalibrationCanvas.gameObject.SetActive(false);
         BLEListCanvas.gameObject.SetActive(true);
-        DifficultyManager.GameMode = false;
+        DifficultyManager.inROMGame = false;
+        DifficultyManager.inEMGGame = false;
     }
 
-
+    /// <summary>
+    /// Always check the connection status.
+    /// Always go back to BLEListCanvas when connection is lost.
+    /// </summary>
     private void Update()
     {
-        // Go back to BLE list anytime when connection is lost
         if (!DeviceButton._isConnected)
         {
             modeSelectCanvas.gameObject.SetActive(false);
@@ -145,12 +148,14 @@ public class GameManager : MonoBehaviour
             EMGGameCanvas.gameObject.SetActive(false);
             CalibrationCanvas.gameObject.SetActive(false);
             BLEListCanvas.gameObject.SetActive(true);
-            DifficultyManager.GameMode = false;
+            DifficultyManager.inROMGame = false;
+            DifficultyManager.inEMGGame = false;
         }
     }
 
     #region BLE functions
 
+    // This two functions send START or END command to BLE device to control the data transmission.
     public void BLEDeviceSTARTSendingData()
     {
         string base64Data = Convert.ToBase64String(Encoding.UTF8.GetBytes("START"));

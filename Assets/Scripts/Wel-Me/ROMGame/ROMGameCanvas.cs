@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,16 +8,23 @@ public class ROMGameCanvas : MonoBehaviour
     public GameObject playButton;
     public GameObject gameOver;
     public Text highestScoreText;
+    public Text ROMDifficultyText;
+
 
 
     // This score will be 0 when exit the app or game over.
     // Any manual or auto disconnection pause will keep this score unchanged.
-    private int score;
+    // Is used to control the game difficulty.
+    public static int currentROMscore;
+
+    private int lastROMScore;
+
+    // Is used to control the game difficulty.
+    public static int gameoverTimeROM;
 
     // This highestScore is set to public and can be stored in database when exit the app.
     // ONLY be 0 when exit the app.
-    public int highestScore;
-    private int lastScore;
+    private int highestROMScore;
 
 
     /// <summary>
@@ -30,8 +35,10 @@ public class ROMGameCanvas : MonoBehaviour
     {
         gameOver.SetActive(false);
         Application.targetFrameRate = 60;
-        scoreText.text = "Score: " + score.ToString();
-        highestScoreText.text = "Highest Score: " + highestScore.ToString();
+        ROMDifficultyText.text = "Level: 0";
+        scoreText.text = "Score: " + currentROMscore.ToString();
+        highestScoreText.text = "Highest Score: " + highestROMScore.ToString();
+        DifficultyManager.difficultyLevel = 0;
         Pause();
     }
 
@@ -40,9 +47,11 @@ public class ROMGameCanvas : MonoBehaviour
     {
         gameOver.SetActive(false);
         Application.targetFrameRate = 60;
-        score = 0;
-        lastScore = 0;
-        highestScore = 0;
+        currentROMscore = 0;
+        lastROMScore = 0;
+        highestROMScore = 0;
+        gameoverTimeROM = 0;
+        DifficultyManager.difficultyLevel = 0;
         Pause();
     }
 
@@ -52,7 +61,7 @@ public class ROMGameCanvas : MonoBehaviour
     /// </summary>
     public void Play()
     {
-        scoreText.text = "Score: " + score.ToString();
+        scoreText.text = "Score: " + currentROMscore.ToString();
         playButton.SetActive(false);
         gameOver.SetActive(false);
         Time.timeScale = 1;
@@ -77,23 +86,23 @@ public class ROMGameCanvas : MonoBehaviour
     }
 
     /// <summary>
-    /// Is called when collide with object with tag "Obstacle"
+    /// Is called when collide with object with tag "Obstacle".
     /// Update Gameover UI.
-    /// Record the last score and update the highest score.
+    /// Record the last score and update the highest score and gameoverTimeROM.
     /// </summary>
     public void GameOver()
     {
         Pause();
         gameOver.SetActive(true);
-        lastScore = 0;
-        lastScore = score;
-        score = 0;
-        if(lastScore > highestScore)
+        lastROMScore = 0;
+        lastROMScore = currentROMscore;
+        currentROMscore = 0;
+        if(lastROMScore > highestROMScore)
         {
-            highestScore = lastScore;
+            highestROMScore = lastROMScore;
         }
-        highestScoreText.text = "Highest Score: " + highestScore.ToString();
-
+        highestScoreText.text = "Highest Score: " + highestROMScore.ToString();
+        gameoverTimeROM++;
     }
 
     /// <summary>
@@ -102,8 +111,8 @@ public class ROMGameCanvas : MonoBehaviour
     /// </summary>
     public void IncreaseScore()
     {
-        score++;
-        scoreText.text = "Score: " + score.ToString();
+        currentROMscore++;
+        scoreText.text = "Score: " + currentROMscore.ToString();
     }
     
 }

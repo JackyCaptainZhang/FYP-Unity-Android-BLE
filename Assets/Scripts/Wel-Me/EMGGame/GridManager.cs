@@ -1,12 +1,15 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class NineGridManager : MonoBehaviour
+public class GridManager : MonoBehaviour
 {
     public GameObject[] covers; // Cover objects in the grid
     public Image cursor; // Cursor object
-    private float[] thresholds; 
+    public Text instructionText;
+    public GameObject playButton;
 
+
+    private float[] thresholds;
     private int currentIndex = -1;
     private float timer = 0f; 
 
@@ -17,9 +20,9 @@ public class NineGridManager : MonoBehaviour
     {
         CalculateThresholds();
         ResetCovers();
-        Time.timeScale = 1;
         currentIndex = -1;
-        timer = 0f; 
+        timer = 0f;
+        Pause();
     }
 
 
@@ -49,6 +52,10 @@ public class NineGridManager : MonoBehaviour
             RevealCover(currentIndex);
             // Reset the timer after revealing the cover
             timer = 0f; 
+        }
+        if(Time.timeScale != 0)
+        {
+            instructionText.text = "Please keep cursor in grid " + revealDelay.ToString() + "s to reveal this cover. Time: " + timer.ToString() + "s.";
         }
     }
 
@@ -112,5 +119,23 @@ public class NineGridManager : MonoBehaviour
     private void UpdateCursor(int index)
     {
         cursor.transform.position = covers[index].transform.position;
+    }
+
+    private void Pause()
+    {
+        Time.timeScale = 0;
+        instructionText.text = "Press button to start.";
+        playButton.SetActive(true);
+        cursor.enabled = false;
+    }
+
+    /// <summary>
+    /// Start the EMG game.
+    /// </summary>
+    public void Play()
+    {
+        Time.timeScale = 1;
+        playButton.SetActive(false);
+        cursor.enabled = true;
     }
 }

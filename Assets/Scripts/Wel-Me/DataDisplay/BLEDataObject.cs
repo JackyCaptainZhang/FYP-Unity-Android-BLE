@@ -6,8 +6,5 @@ public static class BleDataStorage
 
     public static float MaxROM { get; set; }
 
-    public static float MinEMG { get; set; }
-
-    public static float MaxEMG { get; set; }
 
 }

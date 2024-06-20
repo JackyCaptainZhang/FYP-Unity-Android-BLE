@@ -3,7 +3,7 @@
     "m_SelectedProcess": {
         "deviceId": "PT19655VA1332904499",
         "name": "com.com.velorexe.UnityBluetoothLowEnergy",
-        "processId": 14376,
+        "processId": 32326,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -11,169 +11,61 @@
         {
             "deviceId": "PT19655VA1332904499",
             "name": "com.com.velorexe.UnityBluetoothLowEnergy",
-            "processId": 18238,
+            "processId": 30022,
             "exited": true
         },
         {
             "deviceId": "PT19655VA1332904499",
             "name": "com.com.velorexe.UnityBluetoothLowEnergy",
-            "processId": 18538,
+            "processId": 30208,
             "exited": true
         },
         {
             "deviceId": "PT19655VA1332904499",
             "name": "com.com.velorexe.UnityBluetoothLowEnergy",
-            "processId": 18757,
+            "processId": 30405,
             "exited": true
         },
         {
             "deviceId": "PT19655VA1332904499",
             "name": "com.com.velorexe.UnityBluetoothLowEnergy",
-            "processId": 20006,
+            "processId": 30643,
             "exited": true
         },
         {
             "deviceId": "PT19655VA1332904499",
-            "name": "com.com.velorexe.UnityBluetoothLowEnergy",
-            "processId": 20755,
+            "name": "com.android.launcher3",
+            "processId": 2166,
             "exited": false
         },
         {
             "deviceId": "PT19655VA1332904499",
             "name": "com.com.velorexe.UnityBluetoothLowEnergy",
-            "processId": 21239,
+            "processId": 31237,
             "exited": false
         },
         {
             "deviceId": "PT19655VA1332904499",
             "name": "com.com.velorexe.UnityBluetoothLowEnergy",
-            "processId": 32026,
+            "processId": 31432,
             "exited": false
         },
         {
             "deviceId": "PT19655VA1332904499",
             "name": "com.com.velorexe.UnityBluetoothLowEnergy",
-            "processId": 32425,
+            "processId": 31875,
             "exited": false
         },
         {
             "deviceId": "PT19655VA1332904499",
             "name": "com.com.velorexe.UnityBluetoothLowEnergy",
-            "processId": 32658,
+            "processId": 32057,
             "exited": false
         },
         {
             "deviceId": "PT19655VA1332904499",
             "name": "com.com.velorexe.UnityBluetoothLowEnergy",
-            "processId": 435,
-            "exited": false
-        },
-        {
-            "deviceId": "PT19655VA1332904499",
-            "name": "com.com.velorexe.UnityBluetoothLowEnergy",
-            "processId": 802,
-            "exited": false
-        },
-        {
-            "deviceId": "PT19655VA1332904499",
-            "name": "com.com.velorexe.UnityBluetoothLowEnergy",
-            "processId": 1097,
-            "exited": false
-        },
-        {
-            "deviceId": "PT19655VA1332904499",
-            "name": "com.com.velorexe.UnityBluetoothLowEnergy",
-            "processId": 1695,
-            "exited": false
-        },
-        {
-            "deviceId": "PT19655VA1332904499",
-            "name": "com.com.velorexe.UnityBluetoothLowEnergy",
-            "processId": 2120,
-            "exited": false
-        },
-        {
-            "deviceId": "PT19655VA1332904499",
-            "name": "com.com.velorexe.UnityBluetoothLowEnergy",
-            "processId": 2471,
-            "exited": false
-        },
-        {
-            "deviceId": "PT19655VA1332904499",
-            "name": "com.com.velorexe.UnityBluetoothLowEnergy",
-            "processId": 2753,
-            "exited": false
-        },
-        {
-            "deviceId": "PT19655VA1332904499",
-            "name": "com.com.velorexe.UnityBluetoothLowEnergy",
-            "processId": 2976,
-            "exited": false
-        },
-        {
-            "deviceId": "PT19655VA1332904499",
-            "name": "com.com.velorexe.UnityBluetoothLowEnergy",
-            "processId": 3201,
-            "exited": false
-        },
-        {
-            "deviceId": "PT19655VA1332904499",
-            "name": "com.com.velorexe.UnityBluetoothLowEnergy",
-            "processId": 3630,
-            "exited": false
-        },
-        {
-            "deviceId": "PT19655VA1332904499",
-            "name": "com.com.velorexe.UnityBluetoothLowEnergy",
-            "processId": 3815,
-            "exited": false
-        },
-        {
-            "deviceId": "PT19655VA1332904499",
-            "name": "com.com.velorexe.UnityBluetoothLowEnergy",
-            "processId": 4001,
-            "exited": false
-        },
-        {
-            "deviceId": "PT19655VA1332904499",
-            "name": "com.com.velorexe.UnityBluetoothLowEnergy",
-            "processId": 6980,
-            "exited": false
-        },
-        {
-            "deviceId": "PT19655VA1332904499",
-            "name": "com.com.velorexe.UnityBluetoothLowEnergy",
-            "processId": 7288,
-            "exited": false
-        },
-        {
-            "deviceId": "PT19655VA1332904499",
-            "name": "com.com.velorexe.UnityBluetoothLowEnergy",
-            "processId": 7696,
-            "exited": false
-        },
-        {
-            "deviceId": "PT19655VA1332904499",
-            "name": "com.com.velorexe.UnityBluetoothLowEnergy",
-            "processId": 13267,
-            "exited": false
-        },
-        {
-            "deviceId": "PT19655VA1332904499",
-            "name": "com.com.velorexe.UnityBluetoothLowEnergy",
-            "processId": 13493,
-            "exited": false
-        },
-        {
-            "deviceId": "PT19655VA1332904499",
-            "name": "com.com.velorexe.UnityBluetoothLowEnergy",
-            "processId": 14103,
-            "exited": false
-        },
-        {
-            "deviceId": "PT19655VA1332904499",
-            "name": "com.com.velorexe.UnityBluetoothLowEnergy",
-            "processId": 14376,
+            "processId": 32326,
             "exited": false
         },
         {

@@ -7,29 +7,24 @@ namespace Android.BLE.Commands
     /// </summary>
     public class ReadFromCharacteristic : BleCommand
     {
-        /// <summary>
-        /// The UUID of the BLE device.
-        /// </summary>
+        
+        // The UUID of the BLE device. 
         public readonly string DeviceAddress;
 
-        /// <summary>
-        /// The Service that parents the Characteristic.
-        /// </summary>
+
+        // The Service that parents the Characteristic.
         public readonly string Service;
 
-        /// <summary>
-        /// The Characteristic to write the message to.
-        /// </summary>
+        // The Characteristic to write the message to.
         public readonly string Characteristic;
 
-        /// <summary>
-        /// The .NET event that sends the read data back to the user.
-        /// </summary>
+        // A delegate that indicates a read value from a Characteristic.
+        public delegate void ReadCharacteristicValueReceived(byte[] value);
+
+        // The .NET event that sends the read data back to the user.
         public ReadCharacteristicValueReceived OnReadCharacteristicValueReceived;
 
-        /// <summary>
-        /// Indicates if the UUID is custom (long-uuid instead of a short-hand).
-        /// </summary>
+        // Indicates if the UUID is custom (long-uuid instead of a short-hand).
         public readonly bool CustomGatt;
 
         /// <summary>
@@ -73,11 +68,6 @@ namespace Android.BLE.Commands
 
             return false;
         }
-
-        /// <summary>
-        /// A delegate that indicates a read value from a Characteristic.
-        /// </summary>
-        /// <param name="value">The value that was read from the Characteristic.</param>
-        public delegate void ReadCharacteristicValueReceived(byte[] value);
+  
     }
 }

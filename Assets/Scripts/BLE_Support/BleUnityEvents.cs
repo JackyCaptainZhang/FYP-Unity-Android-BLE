@@ -9,9 +9,7 @@ namespace Android.BLE.Events
     [Serializable]
     public class BleMessageReceived : UnityEvent<BleObject> { }
 
-    /// <summary>
-    /// The equivalent of <see cref="BleMessageReceived"/> but then for errors.
-    /// </summary>
+
     [Serializable]
     public class BleErrorReceived : UnityEvent<string> { }
 }

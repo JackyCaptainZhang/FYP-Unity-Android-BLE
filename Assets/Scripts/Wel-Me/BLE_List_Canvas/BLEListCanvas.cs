@@ -7,22 +7,14 @@ using UnityEngine.UI;
 public class BLEListCanvas : MonoBehaviour
 {
 
-    [SerializeField]
-    private GameObject _deviceButton;
-    [SerializeField]
-    private Transform _deviceList_item;
-    [SerializeField]
-    private Transform _deviceList;
-    [SerializeField]
-    private Transform _scanbutton;
-    [SerializeField]
-    private Text _buttonText;
-    [SerializeField]
-    private Canvas CalibrationCanvas;
-    [SerializeField]
-    private Canvas bleListCanvas;
-    [SerializeField]
-    private int _scanTime = 5;
+    public GameObject _deviceButton;
+    public Transform _deviceList_item;
+    public Transform _deviceList;
+    public Transform _scanbutton;
+    public Text _buttonText;
+    public Canvas CalibrationCanvas;
+    public Canvas bleListCanvas;
+    public int _scanTime = 5;
 
     private float _scanTimer = 0f;
     private bool _isScanning = false;
@@ -36,6 +28,9 @@ public class BLEListCanvas : MonoBehaviour
         gameManager = FindObjectOfType<GameManager>();
     }
 
+    /// <summary>
+    /// Update the UI elements for BLE List canvas.
+    /// </summary>
     void Update()
     {
         if (_isScanning)
@@ -65,7 +60,9 @@ public class BLEListCanvas : MonoBehaviour
     }
 
 
-
+    /// <summary>
+    /// Function for the multi-functional button in BLE List Canvas (Scan/Subscribe).
+    /// </summary>
     public void DeviceConfigureClick()
     {
         if (!DeviceButton._isConnected)

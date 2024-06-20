@@ -29,6 +29,7 @@ namespace Android.BLE
         /// <summary>
         /// The method that the Java plugin will send their JSON messages to.
         /// All objects are sent in JSON format.
+        /// Is called each time Java plugin send their JSON messages to Unity.
         /// </summary>
         public void OnBleMessage(string jsonMessage)
         {
@@ -90,11 +91,11 @@ namespace Android.BLE
                 float float2 = HexToFloat(hex2);
 
                 // Store the values in the public static class
-                BleDataStorage.Float1 = float1;
-                BleDataStorage.Float2 = float2;
+                BleDataStorage.ROM_Angle = float1;
+                BleDataStorage.EMG_Control = float2;
 
-                //LogMessage("Float1: " + float1);
-                //LogMessage("Float2: " + float2);
+                //LogMessage("ROM_Angle: " + float1);
+                //LogMessage("EMG_Control: " + float2);
             }
             else
             {

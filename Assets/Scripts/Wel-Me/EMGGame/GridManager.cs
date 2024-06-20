@@ -2,6 +2,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// COntroller for EMG Grid Game.
+/// </summary>
 public class GridManager : MonoBehaviour
 {
     public GameObject[] covers; // Cover objects in the grid
@@ -24,7 +27,7 @@ public class GridManager : MonoBehaviour
 
     private void Update()
     {
-        float data = BleDataStorage.Float2;
+        float data = BleDataStorage.EMG_Control;
 
         // Check for single click (101) or double click (202) and process it only once
         if (!clickProcessed)
@@ -34,14 +37,14 @@ public class GridManager : MonoBehaviour
                 MoveCursorForward();
                 timer = 0f; // Reset the timer on cursor movement
                 clickProcessed = true;
-                BleDataStorage.Float2 = 0;
+                BleDataStorage.EMG_Control = 0;
             }
             else if (data == 202)
             {
                 MoveCursorBackward();
                 timer = 0f; // Reset the timer on cursor movement
                 clickProcessed = true;
-                BleDataStorage.Float2 = 0;
+                BleDataStorage.EMG_Control = 0;
             }
         }
 
@@ -69,7 +72,7 @@ public class GridManager : MonoBehaviour
         timer += Time.deltaTime;
 
         // Reset the clickProcessed flag if no click is detected
-        if (BleDataStorage.Float2 == 0)
+        if (BleDataStorage.EMG_Control == 0)
         {
             clickProcessed = false;
         }
@@ -229,6 +232,9 @@ public class GridManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Check if all cover has been revealed.
+    /// </summary>
     private bool AllCoversRevealed()
     {
         foreach (GameObject cover in covers)
@@ -242,6 +248,9 @@ public class GridManager : MonoBehaviour
         return true; // All covers are revealed
     }
 
+    /// <summary>
+    /// Pause the EMG game.
+    /// </summary>
     private void Pause()
     {
         Time.timeScale = 0;

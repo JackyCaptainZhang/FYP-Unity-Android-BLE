@@ -6,6 +6,10 @@ using UnityEngine.Android;
 using System.Text;
 using UnityEngine.UI;
 
+
+/// <summary>
+/// Main controller for data display.
+/// </summary>
 public class DataDisplayCanvas : MonoBehaviour
 {
     public RawImage chartImage;
@@ -34,7 +38,7 @@ public class DataDisplayCanvas : MonoBehaviour
     void Update()
     {
         // Get the data stream and update the data queue
-        float newData = BleDataStorage.Float1;
+        float newData = BleDataStorage.ROM_Angle;
             if (dataQueue.Count >= maxDataPoints)
             {
                 dataQueue.Dequeue();

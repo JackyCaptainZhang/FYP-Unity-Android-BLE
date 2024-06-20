@@ -1,6 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+
+/// <summary>
+/// Main controller for ROM game.
+/// </summary>
 public class ROMGameCanvas : MonoBehaviour
 {
     public BirdController bird;

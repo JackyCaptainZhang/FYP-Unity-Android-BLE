@@ -28,17 +28,21 @@ public class GameManager : MonoBehaviour
 
 
     // Replace these Characteristics with YOUR device's characteristics
+    // We use the long version of UUID, so make sure that all 'CustomGatt' parameter in all BLE commands should be true!!
     public static string service_UUID = CleanUUID("6E400001-B5A3-F393-­E0A9-­E50E24DCCA9E");
     public static string characteristic_Write_UUID = CleanUUID("6E400002-B5A3-F393-­E0A9-­E50E24DCCA9E");
     public static string characteristic_Notify_UUID = CleanUUID("6E400003-B5A3-F393-­E0A9-­E50E24DCCA9E");
 
+    /// <summary>
+    /// In case any format error in UUID.
+    /// </summary>
     public static string CleanUUID(string uuid)
     {
         return uuid.Replace("\u00AD", "");
     }
 
     /// <summary>
-    /// Define different click actions for different senerio
+    /// Define different click actions for different senerio.
     /// </summary>
     #region Button Controllers
 

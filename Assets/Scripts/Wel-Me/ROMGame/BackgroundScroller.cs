@@ -1,6 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// This script is for background scrolling for ROM game.
+/// The scroll can be paused or start by using 'Time.timeScale'.
+/// </summary>
 public class BackgroundScroller : MonoBehaviour
 {
     public float scrollSpeed = 0.1f;

@@ -1,5 +1,9 @@
 using UnityEngine;
 
+
+/// <summary>
+/// This script is for destroying the pipe objects when they are moving off the screen.
+/// </summary>
 public class DestroyOffScreen : MonoBehaviour
 {
     private RectTransform rectTransform;
@@ -15,10 +19,6 @@ public class DestroyOffScreen : MonoBehaviour
             canvasRect = parentCanvas.GetComponent<RectTransform>();
         }
 
-        if (canvasRect == null)
-        {
-            Debug.LogError("DestroyOffScreen: Canvas RectTransform not found!");
-        }
     }
 
     void Update()

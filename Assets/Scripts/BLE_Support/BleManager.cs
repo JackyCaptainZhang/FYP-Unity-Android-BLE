@@ -68,8 +68,7 @@ namespace Android.BLE
         private static float _activeTimer = 0f;
 
         /// <summary>
-        /// Awake function in Unity
-        /// Will get called when the game start
+        /// Will get called when the game start.
         /// </summary>
         private void Awake()
         {
@@ -166,6 +165,7 @@ namespace Android.BLE
 
                 // Prepares a BleAdapter to receive messages
                 #region BLE Adapter initialize
+
                 if (_adapter == null)
                 {
                     _adapter = FindObjectOfType<BleAdapter>();
@@ -177,15 +177,18 @@ namespace Android.BLE
                         _adapter = bleAdapter.AddComponent<BleAdapter>();
                     }
                 }
+
                 #endregion
 
                 // Binds to the com.velorexe.unityandroidble.UnityAndroidBLE Singleton
                 #region Android Library initialize
+
                 if (_bleLibrary == null)
                 {
                     AndroidJavaClass librarySingleton = new AndroidJavaClass("com.velorexe.unityandroidble.UnityAndroidBLE");
                     _bleLibrary = librarySingleton.CallStatic<AndroidJavaObject>("getInstance");
                 }
+
                 #endregion
             }
         }

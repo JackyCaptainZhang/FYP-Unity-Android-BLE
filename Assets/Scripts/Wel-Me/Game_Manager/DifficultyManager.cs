@@ -1,6 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+
+/// <summary>
+/// Difficulty manager to control two games.
+/// </summary>
 public class DifficultyManager : MonoBehaviour
 {
     public static bool inROMGame;
@@ -27,12 +31,12 @@ public class DifficultyManager : MonoBehaviour
     {
         if (inROMGame)
         {
-            Debug.Log("ROM Parameter: " + PipeMovement.speed + " + " + PipeSpawner.spawnRate);
+            //Debug.Log("ROM Parameter: " + PipeMovement.speed + " + " + PipeSpawner.spawnRate);
             ROMGameDifficultyController();
         }
         if (inEMGGame)
         {
-            Debug.Log("EMG Parameter: ");
+            //Debug.Log("EMG Parameter: ");
             EMGGameDifficultyController();
         }
     }

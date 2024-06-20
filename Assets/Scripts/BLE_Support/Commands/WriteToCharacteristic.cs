@@ -7,39 +7,25 @@ namespace Android.BLE.Commands
     /// </summary>
     public class WriteToCharacteristic : BleCommand
     {
-        /// <summary>
-        /// The UUID of the BLE device.
-        /// </summary>
+        // The UUID of the BLE device.
         public readonly string DeviceAddress;
 
-        /// <summary>
-        /// The Service that parents the Characteristic.
-        /// </summary>
+        
+        // The Service that parents the Characteristic.
         public readonly string Service;
 
-        /// <summary>
-        /// The Characteristic to write the message to.
-        /// </summary>
+        // The Characteristic to write the message to.
         public readonly string Characteristic;
 
-        /// <summary>
-        /// The data that's send encoded in Base64.
-        /// </summary>
+        // The data that's send encoded in Base64.
         public readonly string Base64Data;
 
-        /// <summary>
-        /// Indicates if the UUID is custom (long-uuid instead of a short-hand).
-        /// </summary>
+        // Indicates if the UUID is custom (long-uuid instead of a short-hand).
         public readonly bool CustomGatt;
 
         /// <summary>
         /// Writes to a given BLE Characteristic with the Base64 string <paramref name="data"/>.
         /// </summary>
-        /// <param name="deviceAddress">The UUID of the device that the BLE should send data to.</param>
-        /// <param name="serviceAddress">The UUID of the Service that parents the Characteristic.</param>
-        /// <param name="characteristicAddress">The UUID of the Characteristic to read from.</param>
-        /// <param name="data">The Base64 encoded data that's send to the Characteristic</param>
-        /// <param name="customGatt"><see langword="true"/> if the GATT Characteristic UUID address is a long-hand, not short-hand.</param>
         public WriteToCharacteristic(string deviceAddress, string serviceAddress, string characteristicAddress, string data, bool customGatt = false) : base(false, false)
         {
             DeviceAddress = deviceAddress;

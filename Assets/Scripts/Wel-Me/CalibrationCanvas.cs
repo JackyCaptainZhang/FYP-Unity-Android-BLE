@@ -1,6 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+
+/// <summary>
+/// Main controller for calibration canvas.
+/// </summary>
 public class Calibration : MonoBehaviour
 {
     private bool calibrated;
@@ -12,8 +16,9 @@ public class Calibration : MonoBehaviour
     private int singleClickCount = 0;
     private int doubleClickCount = 0;
 
-    private bool practicingSingleClick = false; // New flag to indicate single click practice
-    private bool practicingDoubleClick = false; // New flag to indicate double click practice
+    // Flags to indicate single/double click practice.
+    private bool practicingSingleClick = false; 
+    private bool practicingDoubleClick = false;
 
     private GameManager gameManager;
 
@@ -33,13 +38,14 @@ public class Calibration : MonoBehaviour
         doubleClickPracticed = false;
         singleClickCount = 0;
         doubleClickCount = 0;
-        practicingSingleClick = false; // Reset practice flags
-        practicingDoubleClick = false; // Reset practice flags
+        // Reset practice flags
+        practicingSingleClick = false; 
+        practicingDoubleClick = false; 
         gameManager = FindObjectOfType<GameManager>();
         gameManager.BLEDeviceSTOPSendingData();
         ROMDataText.text = "ROM Data: ";
         EMGDataText.text = "EMG Control: ";
-        calibrationResultText.text = $"Calibration Results:\nMin ROM: {BleDataStorage.MinROM}\nMax ROM: {BleDataStorage.MaxROM}\nSingle Clicks Practiced: {singleClickCount}\nDouble Clicks Practiced: {doubleClickCount}";
+        calibrationResultText.text = $"Calibration Results:\nMin ROM: {BleDataStorage.MinROM_Angle}\nMax ROM: {BleDataStorage.MaxROM_Angle}\nSingle Clicks Practiced: {singleClickCount}\nDouble Clicks Practiced: {doubleClickCount}";
         instructionText.text = "Let's Start calibration. Press Confirm button to start.";
         confirmButtonText.text = "Start";
     }
@@ -52,24 +58,24 @@ public class Calibration : MonoBehaviour
             calibrated = true;
             instructionText.text = "Calibrate Min ROM. Press Confirm when done.";
             confirmButtonText.text = "Confirm Min ROM";
-            calibrationResultText.text = $"Calibration Results:\nMin ROM: {BleDataStorage.MinROM}\nMax ROM: {BleDataStorage.MaxROM}\nSingle Clicks Practiced: {singleClickCount}\nDouble Clicks Practiced: {doubleClickCount}";
+            calibrationResultText.text = $"Calibration Results:\nMin ROM: {BleDataStorage.MinROM_Angle}\nMax ROM: {BleDataStorage.MaxROM_Angle}\nSingle Clicks Practiced: {singleClickCount}\nDouble Clicks Practiced: {doubleClickCount}";
         }
         else if (!MinROMcalibrated)
         {
-            BleDataStorage.MinROM = BleDataStorage.Float1;
+            BleDataStorage.MinROM_Angle = BleDataStorage.ROM_Angle;
             MinROMcalibrated = true;
             instructionText.text = "Calibrate Max ROM. Press Confirm when done.";
             confirmButtonText.text = "Confirm Max ROM";
-            calibrationResultText.text = $"Calibration Results:\nMin ROM: {BleDataStorage.MinROM}\nMax ROM: {BleDataStorage.MaxROM}\nSingle Clicks Practiced: {singleClickCount}\nDouble Clicks Practiced: {doubleClickCount}";
+            calibrationResultText.text = $"Calibration Results:\nMin ROM: {BleDataStorage.MinROM_Angle}\nMax ROM: {BleDataStorage.MaxROM_Angle}\nSingle Clicks Practiced: {singleClickCount}\nDouble Clicks Practiced: {doubleClickCount}";
         }
         else if (!MaxROMcalibrated)
         {
-            BleDataStorage.MaxROM = BleDataStorage.Float1;
+            BleDataStorage.MaxROM_Angle = BleDataStorage.ROM_Angle;
             MaxROMcalibrated = true;
             instructionText.text = "Practice single click twice. Perform a single click and press Confirm.";
             confirmButtonText.text = "Confirm Single Click";
             practicingSingleClick = true; // Start single click practice
-            calibrationResultText.text = $"Calibration Results:\nMin ROM: {BleDataStorage.MinROM}\nMax ROM: {BleDataStorage.MaxROM}\nSingle Clicks Practiced: {singleClickCount}\nDouble Clicks Practiced: {doubleClickCount}";
+            calibrationResultText.text = $"Calibration Results:\nMin ROM: {BleDataStorage.MinROM_Angle}\nMax ROM: {BleDataStorage.MaxROM_Angle}\nSingle Clicks Practiced: {singleClickCount}\nDouble Clicks Practiced: {doubleClickCount}";
         }
         else if (!singleClickPracticed)
         {
@@ -85,7 +91,7 @@ public class Calibration : MonoBehaviour
             {
                 instructionText.text = "Practice single click twice. Perform a single click and press Confirm.";
             }
-            calibrationResultText.text = $"Calibration Results:\nMin ROM: {BleDataStorage.MinROM}\nMax ROM: {BleDataStorage.MaxROM}\nSingle Clicks Practiced: {singleClickCount}\nDouble Clicks Practiced: {doubleClickCount}";
+            calibrationResultText.text = $"Calibration Results:\nMin ROM: {BleDataStorage.MinROM_Angle}\nMax ROM: {BleDataStorage.MaxROM_Angle}\nSingle Clicks Practiced: {singleClickCount}\nDouble Clicks Practiced: {doubleClickCount}";
         }
         else if (!doubleClickPracticed)
         {
@@ -101,7 +107,7 @@ public class Calibration : MonoBehaviour
             {
                 instructionText.text = "Practice double click twice. Perform a double click and press Confirm.";
             }
-            calibrationResultText.text = $"Calibration Results:\nMin ROM: {BleDataStorage.MinROM}\nMax ROM: {BleDataStorage.MaxROM}\nSingle Clicks Practiced: {singleClickCount}\nDouble Clicks Practiced: {doubleClickCount}";
+            calibrationResultText.text = $"Calibration Results:\nMin ROM: {BleDataStorage.MinROM_Angle}\nMax ROM: {BleDataStorage.MaxROM_Angle}\nSingle Clicks Practiced: {singleClickCount}\nDouble Clicks Practiced: {doubleClickCount}";
         }
         else
         {
@@ -111,29 +117,29 @@ public class Calibration : MonoBehaviour
 
     private void Update()
     {
-        ROMDataText.text = "ROM Data: " + BleDataStorage.Float1.ToString();
+        ROMDataText.text = "ROM Data: " + BleDataStorage.ROM_Angle.ToString();
 
         // Display EMG Control
-        if (BleDataStorage.Float2 == 101)
+        if (BleDataStorage.EMG_Control == 101)
         {
             EMGDataText.text = "EMG Control: Single click";
         }
-        if (BleDataStorage.Float2 == 202)
+        if (BleDataStorage.EMG_Control == 202)
         {
             EMGDataText.text = "EMG Control: Double click";
         }
         
         // Handle click practice
-        if (practicingSingleClick && BleDataStorage.Float2 == 101)
+        if (practicingSingleClick && BleDataStorage.EMG_Control == 101)
         {
             singleClickCount++;
-            BleDataStorage.Float2 = 0;  // Reset to avoid multiple counts in one click
+            BleDataStorage.EMG_Control = 0;  // Reset to avoid multiple counts in one click
         }
 
-        if (practicingDoubleClick && BleDataStorage.Float2 == 202)
+        if (practicingDoubleClick && BleDataStorage.EMG_Control == 202)
         {
             doubleClickCount++;
-            BleDataStorage.Float2 = 0;  // Reset to avoid multiple counts in one click
+            BleDataStorage.EMG_Control = 0;  // Reset to avoid multiple counts in one click
         }
     }
 }
